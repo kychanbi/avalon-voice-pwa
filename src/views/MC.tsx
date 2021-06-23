@@ -8,14 +8,14 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import StopIcon from '@material-ui/icons/Stop';
 // @ts-ignore
 import { Say } from 'react-say';
-import { AllPlayerSetting, SettingContext } from '../state/playerSetting';
+import { AllSetting, SettingContext } from '../state/playerSetting';
 import {
   endSpeaking, findVoice, pauseSpeaking, speak,
 } from '../utils/utils';
 import { Constants } from '../Constant';
 
 interface settingDisplayProps {
-  gameSetting: AllPlayerSetting
+  gameSetting: AllSetting
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -73,7 +73,7 @@ const generateScript = ({
   numberOfEvil,
   // numberOfGood,
   // totalNumberOfPlayer,
-}: AllPlayerSetting): string[] => {
+}: AllSetting): string[] => {
   // let numOtherEvil = numberOfEvil;
   // isMordredPresent && numOtherEvil--;
   // isOberonPresent && numOtherEvil--;
@@ -134,22 +134,22 @@ const StopButton = (props: { stopPlaying: EventHandler<any> }) => {
 const useMCPageHook = () => {
   // const synthesize = useSynthesize();
 
-  const { allPlayerSetting } = useContext(SettingContext);
+  const { allSetting } = useContext(SettingContext);
   const [scriptArr, setScriptText] = useState<string[]>([]);
   const [scriptDisplay, setScriptDisplay] = useState<(string | JSX.Element)[]>([]);
   useEffect(() => {
-    const s = generateScript(allPlayerSetting);
+    const s = generateScript(allSetting);
     const t = addLineBreaksToScript(s);
     setScriptText(s);
     setScriptDisplay(t);
-  }, [allPlayerSetting]);
+  }, [allSetting]);
 
   const playScript = useCallback(() => {
     endSpeaking();
     // const lastSentence = scriptArr.pop() as string;
     scriptArr.forEach((s) => {
-      speak('五，四，三，二，一．', 0.65);
-      speak(s);
+      speak('五，四，三，二，一．', allSetting.countingRate);
+      speak(s, allSetting.speakingRate);
       // await pauseSpeaking(5);
     });
     // console.log('lastSentence',lastSentence)
@@ -157,19 +157,19 @@ const useMCPageHook = () => {
     // synthesize(scriptText.join(' '));
   }, [scriptArr]);
   return {
-    scriptArr, allPlayerSetting, playScript, scriptDisplay,
+    scriptArr, allSetting, playScript, scriptDisplay,
   };
 };
 
 export const MCPage = () => {
   const classes = useStyles();
   const {
-    scriptDisplay, allPlayerSetting, playScript,
+    scriptDisplay, allSetting, playScript,
   } = useMCPageHook();
 
   return (
     <Card variant="outlined" className={classes.mcCard}>
-      <CurrentSettingDisplay gameSetting={allPlayerSetting} />
+      <CurrentSettingDisplay gameSetting={allSetting} />
       <Typography hidden>
         {scriptDisplay}
       </Typography>

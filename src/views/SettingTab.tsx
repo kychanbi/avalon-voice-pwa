@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
 import {
-  InputLabel, Select, MenuItem, makeStyles, FormControl, FormControlLabel, Checkbox, FormGroup,
+  InputLabel, Select, MenuItem, makeStyles, FormControl, FormControlLabel, Checkbox, FormGroup, Slider, Typography,
 } from '@material-ui/core';
 import {
-  CharacterSetting, defaultCharacterSetting, SettingContext,
+  defaultFormSettingState, SettingContext, SettingFormState,
 } from '../state/playerSetting';
 
 import { Constants } from '../Constant';
@@ -20,29 +20,42 @@ const useStyle = makeStyles((theme) => ({
     margin: theme.spacing(1),
     minWidth: '10em',
   },
+  sliderWrap: {
+    maxWidth: '55vw',
+  },
 }));
 
 const labels = Constants.label;
 
 const SettingTab = () => {
   const classes = useStyle();
-  const { allPlayerSetting, editSetting } = useContext(SettingContext);
+  const { allSetting, editSetting } = useContext(SettingContext);
   // const [currNumOfPlayers, setCurrNumOfPlayers] = useState<string>(
-  //   allPlayerSetting.totalNumberOfPlayer ?? defaultCharacterSetting.totalNumberOfPlayer,
+  //   allSetting.totalNumberOfPlayer ?? defaultCharacterSetting.totalNumberOfPlayer,
   // );
-  const [formState, setFormState] = useState<CharacterSetting>(
-    allPlayerSetting ?? defaultCharacterSetting,
+  const [formState, setFormState] = useState<SettingFormState>(
+    allSetting ?? defaultFormSettingState,
   );
 
-  const handleChange = <K extends keyof CharacterSetting>(
+  const handleChange = <K extends keyof SettingFormState>(
     event: React.ChangeEvent<{ name?: string | undefined, value: unknown, checked?: boolean }>,
   ) => {
     const name = event.target.name as K;
-    const value = event.target.value as CharacterSetting[K];
+    const value = event.target.value as SettingFormState[K];
     const checked = event.target.checked as boolean;
     const newVal = checked === undefined ? value : checked;
     setFormState({ ...formState, [name]: newVal });
     editSetting(name, newVal);
+  };
+  const handleSliderChange = (name: string)=> (
+    event: React.ChangeEvent<{}>,
+    value: number | number[],
+  ) => {
+    // console.log(event)
+    // const name = event.target.name as string;
+    if (Array.isArray(value)) return;
+    setFormState({ ...formState, [name]: value });
+    editSetting(name, value);
   };
 
   return (
@@ -80,7 +93,7 @@ const SettingTab = () => {
             <Checkbox
               checked={formState.isMordredPresent}
               onChange={handleChange}
-              name={'isMordredPresent'}
+              name="isMordredPresent"
               color="primary"
             />
           )}
@@ -91,7 +104,7 @@ const SettingTab = () => {
             <Checkbox
               checked={formState.isMorganaPresent}
               onChange={handleChange}
-              name={'isMorganaPresent'}
+              name="isMorganaPresent"
               color="primary"
             />
           )}
@@ -102,7 +115,7 @@ const SettingTab = () => {
             <Checkbox
               checked={formState.isOberonPresent}
               onChange={handleChange}
-              name={'isOberonPresent'}
+              name="isOberonPresent"
               color="primary"
             />
           )}
@@ -113,12 +126,42 @@ const SettingTab = () => {
             <Checkbox
               checked={formState.isLancelotPresent}
               onChange={handleChange}
-              name={'isLancelotPresent'}
+              name="isLancelotPresent"
               color="primary"
             />
           )}
           label={labels.isLancelotPresent}
         />
+        <div className={classes.sliderWrap}>
+          <Typography gutterBottom>
+            speaking speed : {formState.speakingRate}
+          </Typography>
+          <Slider
+            name={'speakingRate'}
+            defaultValue={formState.speakingRate}
+            value={formState.speakingRate}
+            onChange={handleSliderChange('speakingRate')}
+            valueLabelDisplay="auto"
+            min={0.5}
+            max={1.5}
+            step={0.05}
+          />
+        </div>
+        <div className={classes.sliderWrap}>
+          <Typography gutterBottom>
+            counting speed : {formState.countingRate}
+          </Typography>
+          <Slider
+            name={'countingRate'}
+            defaultValue={formState.countingRate}
+            value={formState.countingRate}
+            onChange={handleSliderChange('countingRate')}
+            valueLabelDisplay="auto"
+            min={0.6}
+            max={1.6}
+            step={0.06}
+          />
+        </div>
       </FormGroup>
     </div>
   );
