@@ -1,15 +1,12 @@
 import React, { useContext, useState } from 'react';
 import {
-  InputLabel, Select, MenuItem, makeStyles, FormControl,
+  InputLabel, Select, MenuItem, makeStyles, FormControl, FormControlLabel, Checkbox, FormGroup,
 } from '@material-ui/core';
-import { SettingContext, SettingProps } from '../state/playerSetting';
+import {
+  CharacterSetting, defaultCharacterSetting, SettingContext,
+} from '../state/playerSetting';
 
 import { Constants } from '../Constant';
-
-interface optionProps {
-  val: string,
-  key: string
-}
 
 const useStyle = makeStyles((theme) => ({
   settingTab: {
@@ -19,48 +16,45 @@ const useStyle = makeStyles((theme) => ({
     padding: '3em',
     minWidth: 320,
   },
+  selectFormControl: {
+    margin: theme.spacing(1),
+    minWidth: '10em',
+  },
 }));
 
-const TotalNumberOfPlayerOption = (
-  props: optionProps,
-) => {
-  console.log('TotalNumberOfPlayerOption', props);
-  const { val, key } = props;
-  console.log('TotalNumberOfPlayerOption', val);
-  return (
-    <div>
-      <MenuItem key={key} value={val}>
-        {val}
-      </MenuItem>
-    </div>
-  );
-};
+const labels = Constants.label;
 
 const SettingTab = () => {
-  const { allPlayerSetting, editSetting } = useContext(SettingContext);
-  const [currVal, setCurVal] = useState(allPlayerSetting?.totalNumberOfPlayer);
-  const [isNumberOfPlayerOpen, setIsNumberOfPlayerOpen] = useState(false);
-  const totalNumberOfPlayerOnChange = (e: any) => {
-    console.log('totalNumberOfPlayerOnChange', e);
-    editSetting(SettingProps.totalNumberOfPlayer, e.target.value);
-  };
-  const numOfPlayerOnChange = (e: any) => {
-    setCurVal(e?.target?.value);
-    totalNumberOfPlayerOnChange(e);
-  };
-
   const classes = useStyle();
+  const { allPlayerSetting, editSetting } = useContext(SettingContext);
+  // const [currNumOfPlayers, setCurrNumOfPlayers] = useState<string>(
+  //   allPlayerSetting.totalNumberOfPlayer ?? defaultCharacterSetting.totalNumberOfPlayer,
+  // );
+  const [formState, setFormState] = useState<CharacterSetting>(
+    allPlayerSetting ?? defaultCharacterSetting,
+  );
+
+  const handleChange = <K extends keyof CharacterSetting>(
+    event: React.ChangeEvent<{ name?: string | undefined, value: unknown, checked?: boolean }>,
+  ) => {
+    const name = event.target.name as K;
+    const value = event.target.value as CharacterSetting[K];
+    const checked = event.target.checked as boolean;
+    const newVal = checked === undefined ? value : checked;
+    setFormState({ ...formState, [name]: newVal });
+    editSetting(name, newVal);
+  };
 
   return (
     <div className={classes.settingTab}>
-      <FormControl>
+      <FormControl className={classes.selectFormControl}>
         <InputLabel>Number of Player</InputLabel>
         <Select
-          labelId="demo-simple-select-helper-label"
-          id="demo-simple-select-helper"
-          value={currVal}
-          onChange={numOfPlayerOnChange}
-
+          labelId="select-total-number-of-player-label"
+          id="select-total-number-of-player"
+          value={formState.totalNumberOfPlayer}
+          onChange={handleChange}
+          name="totalNumberOfPlayer"
         >
           {Object.keys(
             Constants.totalNumberOfPlayers,
@@ -69,6 +63,63 @@ const SettingTab = () => {
           )}
         </Select>
       </FormControl>
+      <FormGroup>
+        <FormControlLabel
+          control={(
+            <Checkbox
+              checked={formState.isPercivalPresent}
+              onChange={handleChange}
+              name="isPercivalPresent"
+              color="primary"
+            />
+          )}
+          label={labels.isPercivalPresent}
+        />
+        <FormControlLabel
+          control={(
+            <Checkbox
+              checked={formState.isMordredPresent}
+              onChange={handleChange}
+              name={'isMordredPresent'}
+              color="primary"
+            />
+          )}
+          label={labels.isMordredPresent}
+        />
+        <FormControlLabel
+          control={(
+            <Checkbox
+              checked={formState.isMorganaPresent}
+              onChange={handleChange}
+              name={'isMorganaPresent'}
+              color="primary"
+            />
+          )}
+          label={labels.isMorganaPresent}
+        />
+        <FormControlLabel
+          control={(
+            <Checkbox
+              checked={formState.isOberonPresent}
+              onChange={handleChange}
+              name={'isOberonPresent'}
+              color="primary"
+            />
+          )}
+          label={labels.isOberonPresent}
+        />
+        <FormControlLabel
+          control={(
+            <Checkbox
+              checked={formState.isLancelotPresent}
+              onChange={handleChange}
+              name={'isLancelotPresent'}
+              color="primary"
+            />
+          )}
+          label={labels.isLancelotPresent}
+        />
+      </FormGroup>
     </div>
   );
 };

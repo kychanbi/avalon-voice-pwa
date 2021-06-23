@@ -3433,6 +3433,11 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
+classnames@^2.2.6:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.1.tgz#dfcfa3891e306ec1dad105d0e88f4417b8535e8e"
+  integrity sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==
+
 clean-css@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-4.2.3.tgz#507b5de7d97b48ee53d84adb0160ff6216380f78"
@@ -5049,6 +5054,11 @@ etag@~1.8.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
+
+event-as-promise@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/event-as-promise/-/event-as-promise-1.0.5.tgz#3e8f68b0f6ceacc8e607ca6578a1fdb08bc01b39"
+  integrity sha512-z/WIlyou7oTvXBjm5YYjfklr2d8gUWtx8b5GAcrIs1n1D35f7NIK0CrcYSXbY3VYikG9bUan+wScPyGXL/NH4A==
 
 eventemitter3@^4.0.0:
   version "4.0.7"
@@ -7628,6 +7638,11 @@ media-typer@0.3.0:
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
   integrity sha1-hxDXrwqmJvj/+hzgAWhUUmMlV0g=
 
+memoize-one@^5.1.1:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.2.1.tgz#8337aa3c4335581839ec01c3d594090cebe8f00e"
+  integrity sha512-zYiwtZUcYyXKo/np96AGZAckk+FWWsUdJ3cHGGmld7+AhvcWmQyGCYUh1hc4Q/pkOhb65dQR/pqCyK0cOaHz4Q==
+
 memory-fs@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/memory-fs/-/memory-fs-0.4.1.tgz#3a9a20b8462523e447cfbc7e8bb80ed667bfc552"
@@ -9648,6 +9663,16 @@ react-refresh@^0.8.3:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.8.3.tgz#721d4657672d400c5e3c75d063c4a85fb2d5d68f"
   integrity sha512-X8jZHc7nCMjaCqoU+V2I0cOhNW+QMBwSUkeXnTi8IPe6zaRWfn60ZzvFDZqWPfmSJfjub7dDW1SP0jaHWLu/hg==
+
+react-say@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-say/-/react-say-2.0.1.tgz#093549a3ed81667f0869eeffc077369f957b5b71"
+  integrity sha512-jyi93q/wcNcgIGXPo3OnRGIQ8DjzZoHd3lEd29CofwEGv6K+VW0HB1AZNt56ELzysi+KsPOJh5yWexmvNWwCDg==
+  dependencies:
+    "@babel/runtime" "^7.7.2"
+    classnames "^2.2.6"
+    event-as-promise "^1.0.5"
+    memoize-one "^5.1.1"
 
 react-scripts@4.0.3:
   version "4.0.3"

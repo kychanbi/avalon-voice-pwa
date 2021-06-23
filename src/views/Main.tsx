@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dialog, Fab, makeStyles } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import { SettingTab } from './SettingTab';
 import { SettingContextProvider } from '../state/playerSetting';
+import { MCPage } from './MC';
+import { initVoice } from '../utils/utils';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,6 +12,8 @@ const useStyles = makeStyles((theme) => ({
     width: '100vw',
     height: '100vh',
     position: 'relative',
+    boxSizing: 'border-box',
+    padding: theme.spacing(2),
   },
   fab: {
     position: 'absolute',
@@ -30,13 +34,15 @@ export const Main = () => {
   const closeDialog = () => {
     setIsDialogOpen(false);
   };
+
   return (
     <SettingContextProvider>
       <div className={classes.root}>
+        <MCPage />
         <Dialog open={isDialogOpen} onClose={closeDialog} fullWidth>
           <SettingTab />
         </Dialog>
-        <Fab color="primary" aria-label="edit" onClick={btnOnClick} className={classes.fab}>
+        <Fab color="secondary" aria-label="edit" onClick={btnOnClick} className={classes.fab}>
           <EditIcon />
         </Fab>
       </div>

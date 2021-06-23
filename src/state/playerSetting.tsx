@@ -1,48 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import { Constants } from '../Constant';
 
-interface CharacterSetting {
-  totalNumberOfPlayer: number,
+export interface CharacterSetting {
+  totalNumberOfPlayer: string,
   isPercivalPresent: boolean,
   isMordredPresent: boolean,
   isMorganaPresent: boolean,
   isOberonPresent: boolean,
+  isLancelotPresent: boolean,
 }
 
-interface AllPlayerSetting {
-  totalNumberOfPlayer: number,
-  isPercivalPresent: boolean,
-  isMordredPresent: boolean,
-  isMorganaPresent: boolean,
-  isOberonPresent: boolean,
+export interface AllPlayerSetting extends CharacterSetting {
   numberOfGood: number,
   numberOfEvil: number,
 }
 
-const defaultAllPlayerSetting = {
-  totalNumberOfPlayer: 5,
+export interface voiceSetting {
+  speakingRate: number,
+
+}
+
+export const defaultCharacterSetting: CharacterSetting = {
+  totalNumberOfPlayer: '5',
   isPercivalPresent: false,
   isMordredPresent: false,
   isMorganaPresent: false,
   isOberonPresent: false,
+  isLancelotPresent: false,
+};
+const defaultAllPlayerSetting: AllPlayerSetting = {
   numberOfGood: 3,
   numberOfEvil: 2,
+  ...defaultCharacterSetting,
 };
 
-const defaultCharacterSetting: CharacterSetting = {
-  totalNumberOfPlayer: 5,
-  isPercivalPresent: false,
-  isMordredPresent: false,
-  isMorganaPresent: false,
-  isOberonPresent: false,
-};
-
-enum SettingProps {
+export enum SettingProps {
   totalNumberOfPlayer = 'totalNumberOfPlayer',
   isPercivalPresent = 'isPercivalPresent',
   isMordredPresent = 'isMordredPresent',
   isMorganaPresent = 'isMorganaPresent',
   isOberonPresent = 'isOberonPresent',
+  isLancelotPresent = 'isLancelotPresent',
   // numberOfGood = 'numberOfGood',
   // numberOfEvil = 'numberOfEvil',
 }
@@ -52,10 +50,10 @@ interface GoodEvilNumber {
   numberOfEvil: number
 }
 
-function calcGoodEvilNumber(total: number): GoodEvilNumber {
+function calcGoodEvilNumber(total: string): GoodEvilNumber {
   return {
-    numberOfGood: Constants.totalNumberOfPlayers[total.toString()]?.good,
-    numberOfEvil: Constants.totalNumberOfPlayers[total.toString()]?.evil,
+    numberOfGood: Constants.totalNumberOfPlayers[total].good,
+    numberOfEvil: Constants.totalNumberOfPlayers[total].evil,
   } as GoodEvilNumber;
 }
 
@@ -64,7 +62,7 @@ interface SettingContextType {
   editSetting: Function
 }
 
-const SettingContext = React.createContext<SettingContextType>({
+export const SettingContext = React.createContext<SettingContextType>({
   allPlayerSetting: defaultAllPlayerSetting,
   editSetting: () => {
   },
@@ -74,7 +72,7 @@ interface SettingContextProviderProp {
   children: React.ReactNode
 }
 
-const SettingContextProvider = ({ children }: SettingContextProviderProp) => {
+export const SettingContextProvider = ({ children }: SettingContextProviderProp) => {
   const [currentSetting, setCurrentSetting] = useState<CharacterSetting>(defaultCharacterSetting);
   const [allPlayerSetting, setAllPlayerSetting] = useState<AllPlayerSetting>(
     defaultAllPlayerSetting,
@@ -85,7 +83,9 @@ const SettingContextProvider = ({ children }: SettingContextProviderProp) => {
     setCurrentSetting(tempSetting);
   };
   useEffect(() => {
-    const { numberOfGood, numberOfEvil } = calcGoodEvilNumber(currentSetting.totalNumberOfPlayer);
+    const { numberOfGood, numberOfEvil } = calcGoodEvilNumber(
+      currentSetting.totalNumberOfPlayer ?? defaultCharacterSetting.totalNumberOfPlayer,
+    );
     const tempSetting: AllPlayerSetting = {
       ...currentSetting, numberOfGood, numberOfEvil,
     };
@@ -97,5 +97,3 @@ const SettingContextProvider = ({ children }: SettingContextProviderProp) => {
     </SettingContext.Provider>
   );
 };
-
-export { SettingContextProvider, SettingContext, SettingProps };
