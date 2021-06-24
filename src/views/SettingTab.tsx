@@ -71,7 +71,7 @@ const SettingTab = ({ closeDialog }:{closeDialog:EventHandler<any>}) => {
   return (
     <div className={classes.settingTab}>
       <Fab className={classes.closeBtn} onClick={closeDialog}>
-        <CloseIcon/>
+        <CloseIcon />
       </Fab>
       <FormControl className={classes.selectFormControl}>
         <InputLabel>Number of Player</InputLabel>

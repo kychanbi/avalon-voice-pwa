@@ -70,7 +70,7 @@ const generateScript = ({
   else if (isOberonPresent) scriptEvil = `除左【奧柏倫】以外，${scriptEvil}`;
   else if (isLancelotPresent) scriptEvil = `除左【蘭斯洛特】以外，${scriptEvil}，蘭斯洛特豎起手指公`;
   const scriptEvil2 = '所有壞人合埋眼';
-  const scriptEvil3 = `${isMordredPresent ? '除左【莫德雷德】以外' : ''}，壞人豎起手指公。梅林擘大眼`;
+  const scriptEvil3 = `${isMordredPresent ? '除左【莫德雷德】以外，' : ''}壞人豎起手指公。梅林擘大眼`;
   // const numOfEvilShown = numberOfEvil - (+isMordredPresent);
   // const scriptGood = '';
   // ，`總共有 ${numOfEvilShown} 個壞人，如果數目有錯，請出聲。`;
