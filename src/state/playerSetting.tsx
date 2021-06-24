@@ -20,6 +20,10 @@ export interface VoiceSetting {
   countingRate: number,
 }
 
+export interface PresetSetting extends CharacterSetting{
+  desc: string
+}
+
 export interface SettingFormState extends VoiceSetting, CharacterSetting{}
 
 export const defaultFormSettingState: SettingFormState = {
@@ -64,12 +68,15 @@ function calcGoodEvilNumber(total: string): GoodEvilNumber {
 
 interface SettingContextType {
   allSetting: AllSetting,
-  editSetting: Function
+  editSetting: Function,
+  editAllCharacterSettings: Function
 }
 
 export const SettingContext = React.createContext<SettingContextType>({
   allSetting: defaultAllSetting,
   editSetting: () => {
+  },
+  editAllCharacterSettings: () => {
   },
 });
 
@@ -82,6 +89,10 @@ export const SettingContextProvider = ({ children }: SettingContextProviderProp)
   const [allSetting, setAllSetting] = useState<AllSetting>(
     defaultAllSetting,
   );
+  const editAllCharacterSettings = (value: CharacterSetting) => {    
+    const tempSetting = { ...currentSetting, ...value };
+    setCurrentSetting(tempSetting);
+  };
   const editSetting = (settingType: SettingProps, value: any) => {
     console.log('editSetting', settingType, value);
     const tempSetting = { ...currentSetting, [settingType]: value };
@@ -97,7 +108,7 @@ export const SettingContextProvider = ({ children }: SettingContextProviderProp)
     setAllSetting(tempSetting);
   }, [currentSetting]);
   return (
-    <SettingContext.Provider value={{ allSetting, editSetting }}>
+    <SettingContext.Provider value={{ allSetting, editSetting, editAllCharacterSettings}}>
       {children}
     </SettingContext.Provider>
   );

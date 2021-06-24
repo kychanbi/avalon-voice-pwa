@@ -1,3 +1,5 @@
+import { PresetSetting } from "./state/playerSetting";
+
 interface NumberOfPlayers {
   good: number,
   evil: number
@@ -9,6 +11,7 @@ interface ConstantsInterface {
   label:
     Record<string, string>,
   voice:string,
+  presets: { [key: string]: PresetSetting; }
 }
 
 const Constants: ConstantsInterface = {
@@ -46,6 +49,35 @@ const Constants: ConstantsInterface = {
     isLancelotPresent: '蘭斯洛特',
   },
   voice: 'zh-HK',
+  presets: {
+    "preset-6": {
+      totalNumberOfPlayer: "6",
+      isPercivalPresent: false,
+      isMordredPresent: true,
+      isMorganaPresent: false,
+      isOberonPresent: false,
+      isLancelotPresent: true,
+      desc:"經典六人"
+    },
+    "preset-7": {
+      totalNumberOfPlayer: "7",
+      isPercivalPresent: false,
+      isMordredPresent: true,
+      isMorganaPresent: false,
+      isOberonPresent: false,
+      isLancelotPresent: true,
+      desc:"經典七人"
+    },
+    "preset-8": {
+      totalNumberOfPlayer: "8",
+      isPercivalPresent: true,
+      isMordredPresent: true,
+      isMorganaPresent: true,
+      isOberonPresent: false,
+      isLancelotPresent: true,
+      desc:"經典八人"
+    }
+  }
 };
 Object.freeze(Constants);
 

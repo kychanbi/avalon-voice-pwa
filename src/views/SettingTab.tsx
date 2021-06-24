@@ -5,6 +5,7 @@ import {
   MenuItem,
   makeStyles,
   FormControl, FormControlLabel, Checkbox, FormGroup, Slider, Typography, Fab,
+  Button
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import {
@@ -33,13 +34,16 @@ const useStyle = makeStyles((theme) => ({
     right: theme.spacing(3),
     cursor: 'pointer',
   },
+  presetBtn: {
+    marginRight: theme.spacing(2),
+  }
 }));
 
 const labels = Constants.label;
 
-const SettingTab = ({ closeDialog }:{closeDialog:EventHandler<any>}) => {
+const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
   const classes = useStyle();
-  const { allSetting, editSetting } = useContext(SettingContext);
+  const { allSetting, editSetting, editAllCharacterSettings } = useContext(SettingContext);
   // const [currNumOfPlayers, setCurrNumOfPlayers] = useState<string>(
   //   allSetting.totalNumberOfPlayer ?? defaultCharacterSetting.totalNumberOfPlayer,
   // );
@@ -68,11 +72,24 @@ const SettingTab = ({ closeDialog }:{closeDialog:EventHandler<any>}) => {
     editSetting(name, value);
   };
 
+    const handlePresetClick = (id: string) => {
+    const setting =  Constants.presets[id];
+    setFormState({ ...formState, ...setting });
+    editAllCharacterSettings(setting);
+  }
+
   return (
     <div className={classes.settingTab}>
       <Fab className={classes.closeBtn} onClick={closeDialog}>
         <CloseIcon />
       </Fab>
+
+      {
+        Object.keys(Constants.presets).map(key =>
+          <Button className={classes.presetBtn} variant="contained" color="primary" id={key} onClick={(event => handlePresetClick(key))}> {Constants.presets[key].desc}</Button>
+        )
+      }
+
       <FormControl className={classes.selectFormControl}>
         <InputLabel>Number of Player</InputLabel>
         <Select
