@@ -6,13 +6,10 @@ import {
 } from '@material-ui/core';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import StopIcon from '@material-ui/icons/Stop';
-// @ts-ignore
-import { Say } from 'react-say';
 import { AllSetting, SettingContext } from '../state/playerSetting';
 import {
-  endSpeaking, findVoice, pauseSpeaking, speak,
+  endSpeaking, speak,
 } from '../utils/utils';
-import { Constants } from '../Constant';
 
 interface settingDisplayProps {
   gameSetting: AllSetting
@@ -29,8 +26,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CurrentSettingDisplay = (props: settingDisplayProps) => {
-  const { numberOfGood, numberOfEvil, totalNumberOfPlayer } = props.gameSetting;
+const CurrentSettingDisplay = ({ gameSetting }: settingDisplayProps) => {
+  const {
+    numberOfGood, numberOfEvil, totalNumberOfPlayer,
+  } = gameSetting;
   return (
     <Box>
       <Typography variant="subtitle1">
@@ -51,28 +50,12 @@ const CurrentSettingDisplay = (props: settingDisplayProps) => {
     </Box>
   );
 };
-
-interface ScriptObj {
-  script1: string,
-  scriptEvil: string,
-  scriptEvil2: string,
-  scriptEvil3: string,
-  scriptGood: string,
-  scriptGood2: string,
-  scriptGood3: string,
-  scriptGood4: string,
-  scriptGood5: string,
-}
-
 const generateScript = ({
   isLancelotPresent,
   isMordredPresent,
   isMorganaPresent,
   isOberonPresent,
   isPercivalPresent,
-  numberOfEvil,
-  // numberOfGood,
-  // totalNumberOfPlayer,
 }: AllSetting): string[] => {
   // let numOtherEvil = numberOfEvil;
   // isMordredPresent && numOtherEvil--;
@@ -81,27 +64,29 @@ const generateScript = ({
   // isLancelotPresent && numOtherEvil--;
 
   // const script1 = '';
-  // let scriptEvil = '所有玩家合埋眼，伸手握拳放係枱上，所有壞人開眼';
+  // let scriptEvil = '所有人合埋眼，伸手握拳放係枱上，所有壞人開眼';
   let scriptEvil = '所有壞人擘大眼';
   if (isLancelotPresent && isOberonPresent) scriptEvil = `除【奧柏倫同蘭斯洛特】以外，${scriptEvil}，蘭斯洛特豎起手指公`;
   else if (isOberonPresent) scriptEvil = `除左【奧柏倫】以外，${scriptEvil}`;
   else if (isLancelotPresent) scriptEvil = `除左【蘭斯洛特】以外，${scriptEvil}，蘭斯洛特豎起手指公`;
   const scriptEvil2 = '所有壞人合埋眼';
-  const scriptEvil3 = `${isMordredPresent ? '除左【莫德雷德】以外' : ''}所有壞人合埋眼，豎起手指公。`;
+  const scriptEvil3 = `${isMordredPresent ? '除左【莫德雷德】以外' : ''}，壞人豎起手指公。梅林擘大眼`;
   // const numOfEvilShown = numberOfEvil - (+isMordredPresent);
-  const scriptGood = '梅林擘大眼';
+  // const scriptGood = '';
   // ，`總共有 ${numOfEvilShown} 個壞人，如果數目有錯，請出聲。`;
   const scriptGood2 = '梅林合埋眼，壞人收起手指公';
   const scriptGood3 = isPercivalPresent ? `【梅林】${isMorganaPresent && '及【莫甘娜】'} 豎起手指公，【派西維爾】擘大眼。
 ` : '';
   const scriptGood4 = isPercivalPresent ? `【梅林】${isMorganaPresent && '及【莫甘娜】'} 收起手指公，【派西維爾】合埋眼。` : '';
-  const scriptGood5 = '所有玩家擘大眼';
+  const scriptGood5 = '所有人擘大眼';
   return [
-     scriptEvil, scriptEvil2, scriptEvil3, scriptGood, scriptGood2, scriptGood3, scriptGood4, scriptGood5,
-  ].filter(s => !!s);
+    scriptEvil, scriptEvil2, scriptEvil3,
+    scriptGood2, scriptGood3, scriptGood4, scriptGood5,
+  ].filter((s) => !!s);
 };
 
 const addLineBreaksToScript = (script: string[]): (string | JSX.Element)[] => (script).map(
+  // eslint-disable-next-line react/jsx-key
   (x) => [x, <br />],
 ).reduce(
   (ac, curr) => (ac.concat(curr)), [],
@@ -170,7 +155,7 @@ export const MCPage = () => {
   return (
     <Card variant="outlined" className={classes.mcCard}>
       <CurrentSettingDisplay gameSetting={allSetting} />
-      <Typography hidden>
+      <Typography>
         {scriptDisplay}
       </Typography>
       <div className={classes.playBtnWrap}>

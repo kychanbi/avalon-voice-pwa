@@ -1,11 +1,15 @@
-import React, { useContext, useState } from 'react';
+import React, { EventHandler, useContext, useState } from 'react';
 import {
-  InputLabel, Select, MenuItem, makeStyles, FormControl, FormControlLabel, Checkbox, FormGroup, Slider, Typography,
+  InputLabel,
+  Select,
+  MenuItem,
+  makeStyles,
+  FormControl, FormControlLabel, Checkbox, FormGroup, Slider, Typography, Fab,
 } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 import {
   defaultFormSettingState, SettingContext, SettingFormState,
 } from '../state/playerSetting';
-
 import { Constants } from '../Constant';
 
 const useStyle = makeStyles((theme) => ({
@@ -17,17 +21,23 @@ const useStyle = makeStyles((theme) => ({
     minWidth: 320,
   },
   selectFormControl: {
-    margin: theme.spacing(1),
+    margin: `${theme.spacing(1)}px 0`,
     minWidth: '10em',
   },
   sliderWrap: {
     maxWidth: '55vw',
   },
+  closeBtn: {
+    position: 'absolute',
+    top: theme.spacing(3),
+    right: theme.spacing(3),
+    cursor: 'pointer',
+  },
 }));
 
 const labels = Constants.label;
 
-const SettingTab = () => {
+const SettingTab = ({ closeDialog }:{closeDialog:EventHandler<any>}) => {
   const classes = useStyle();
   const { allSetting, editSetting } = useContext(SettingContext);
   // const [currNumOfPlayers, setCurrNumOfPlayers] = useState<string>(
@@ -47,7 +57,7 @@ const SettingTab = () => {
     setFormState({ ...formState, [name]: newVal });
     editSetting(name, newVal);
   };
-  const handleSliderChange = (name: string)=> (
+  const handleSliderChange = (name: string) => (
     event: React.ChangeEvent<{}>,
     value: number | number[],
   ) => {
@@ -60,6 +70,9 @@ const SettingTab = () => {
 
   return (
     <div className={classes.settingTab}>
+      <Fab className={classes.closeBtn} onClick={closeDialog}>
+        <CloseIcon/>
+      </Fab>
       <FormControl className={classes.selectFormControl}>
         <InputLabel>Number of Player</InputLabel>
         <Select
@@ -134,10 +147,12 @@ const SettingTab = () => {
         />
         <div className={classes.sliderWrap}>
           <Typography gutterBottom>
-            speaking speed : {formState.speakingRate}
+            speaking speed :
+            {' '}
+            {formState.speakingRate}
           </Typography>
           <Slider
-            name={'speakingRate'}
+            name="speakingRate"
             defaultValue={formState.speakingRate}
             value={formState.speakingRate}
             onChange={handleSliderChange('speakingRate')}
@@ -149,10 +164,12 @@ const SettingTab = () => {
         </div>
         <div className={classes.sliderWrap}>
           <Typography gutterBottom>
-            counting speed : {formState.countingRate}
+            counting speed :
+            {' '}
+            {formState.countingRate}
           </Typography>
           <Slider
-            name={'countingRate'}
+            name="countingRate"
             defaultValue={formState.countingRate}
             value={formState.countingRate}
             onChange={handleSliderChange('countingRate')}
