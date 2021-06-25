@@ -75,9 +75,9 @@ const generateScript = ({
   // const scriptGood = '';
   // ，`總共有 ${numOfEvilShown} 個壞人，如果數目有錯，請出聲。`;
   const scriptGood2 = '梅林合埋眼，壞人收起手指公';
-  const scriptGood3 = isPercivalPresent ? `【梅林】${isMorganaPresent && '及【莫甘娜】'} 豎起手指公，【派西維爾】擘大眼。
+  const scriptGood3 = isPercivalPresent ? `【梅林】${isMorganaPresent ? '及【莫甘娜】' : ''} 豎起手指公，【派西維爾】擘大眼。
 ` : '';
-  const scriptGood4 = isPercivalPresent ? `【梅林】${isMorganaPresent && '及【莫甘娜】'} 收起手指公，【派西維爾】合埋眼。` : '';
+  const scriptGood4 = isPercivalPresent ? `【梅林】${isMorganaPresent ? '及【莫甘娜】' : ''} 收起手指公，【派西維爾】合埋眼。` : '';
   const scriptGood5 = '所有人擘大眼';
   return [
     scriptEvil, scriptEvil2, scriptEvil3,
