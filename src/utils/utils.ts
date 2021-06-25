@@ -19,10 +19,12 @@ export async function sleep(ms: number){
 // setVoice(Constants.voice);
 // }
 
+
 export function speak(text: string, rate = 1){
   const synth = window.speechSynthesis;
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.voice = findVoiceByLang(Constants.langs) as SpeechSynthesisVoice;
+  utterance.lang = utterance.voice?.lang;
   utterance.rate = rate;
   // synth.cancel();
   synth.speak(utterance);

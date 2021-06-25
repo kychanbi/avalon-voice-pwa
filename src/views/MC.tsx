@@ -2,7 +2,7 @@ import React, {
   EventHandler, useCallback, useContext, useEffect, useState,
 } from 'react';
 import {
-  Box, Card, Fab, makeStyles, Typography,
+  Box, Card, CircularProgress, Fab, makeStyles, Typography,
 } from '@material-ui/core';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import StopIcon from '@material-ui/icons/Stop';
@@ -126,6 +126,7 @@ const useMCPageHook = () => {
   const { allSetting } = useContext(SettingContext);
   const [scriptArr, setScriptText] = useState<string[]>([]);
   const [scriptDisplay, setScriptDisplay] = useState<(string | JSX.Element)[]>([]);
+  const [areVoicesLoaded, setAreVoicesLoad] = useState(false);
   useEffect(() => {
     const s = generateScript(allSetting);
     const t = addLineBreaksToScript(s);
@@ -133,29 +134,33 @@ const useMCPageHook = () => {
     setScriptDisplay(t);
   }, [allSetting]);
 
+  useEffect(() => {
+    const synth = window.speechSynthesis;
+    synth.getVoices();
+    synth.onvoiceschanged = () => {
+      const voices = synth.getVoices();
+      if (voices.length > 0){
+        setAreVoicesLoad(true);
+      }
+    };
+  }, []);
   const playScript = useCallback(() => {
     endSpeaking();
-    // const lastSentence = scriptArr.pop() as string;
     scriptArr.forEach((s) => {
-      speak('五，四，三，二，一．', allSetting.countingRate);
+      speak('三，二，一．', allSetting.countingRate);
       speak(s, allSetting.speakingRate);
-      // await pauseSpeaking(5);
     });
-    // console.log('lastSentence',lastSentence)
-    // speak(lastSentence);
-    // synthesize(scriptText.join(' '));
   }, [scriptArr]);
   return {
-    scriptArr, allSetting, playScript, scriptDisplay,
+    scriptArr, allSetting, playScript, scriptDisplay, areVoicesLoaded,
   };
 };
 
 export const MCPage = () => {
   const classes = useStyles();
   const {
-    scriptDisplay, allSetting, playScript,
+    scriptDisplay, allSetting, playScript, areVoicesLoaded,
   } = useMCPageHook();
-  // TODO : add loading state when SpeechSynthesisVoice is not loaded
   return (
     <Card variant="outlined" className={classes.mcCard}>
       <CurrentSettingDisplay gameSetting={allSetting} />
@@ -163,7 +168,7 @@ export const MCPage = () => {
         {scriptDisplay}
       </Typography>
       <div className={classes.playBtnWrap}>
-        <PlayButton playOnClick={playScript} />
+        {areVoicesLoaded ? <PlayButton playOnClick={playScript} /> : <CircularProgress />}
       </div>
       <div className={classes.playBtnWrap}>
         <StopButton stopPlaying={endSpeaking} />

@@ -35,7 +35,7 @@ export const defaultFormSettingState: SettingFormState = {
   isOberonPresent: false,
   isLancelotPresent: false,
   speakingRate: 0.8,
-  countingRate: 0.65,
+  countingRate: 0.9,
 };
 
 const defaultAllSetting: AllSetting = {

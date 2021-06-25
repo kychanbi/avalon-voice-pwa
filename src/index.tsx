@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
+document.documentElement.lang = 'zh-HK';
 ReactDOM.render(
   <React.StrictMode>
     <App />
