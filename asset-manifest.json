@@ -1,24 +1,24 @@
 {
   "files": {
     "main.css": "/avalon-voice-pwa/static/css/main.8c8b27cf.chunk.css",
-    "main.js": "/avalon-voice-pwa/static/js/main.76e3faa0.chunk.js",
-    "main.js.map": "/avalon-voice-pwa/static/js/main.76e3faa0.chunk.js.map",
-    "runtime-main.js": "/avalon-voice-pwa/static/js/runtime-main.9abf124a.js",
-    "runtime-main.js.map": "/avalon-voice-pwa/static/js/runtime-main.9abf124a.js.map",
-    "static/js/2.97ea9296.chunk.js": "/avalon-voice-pwa/static/js/2.97ea9296.chunk.js",
-    "static/js/2.97ea9296.chunk.js.map": "/avalon-voice-pwa/static/js/2.97ea9296.chunk.js.map",
-    "static/js/3.678742a9.chunk.js": "/avalon-voice-pwa/static/js/3.678742a9.chunk.js",
-    "static/js/3.678742a9.chunk.js.map": "/avalon-voice-pwa/static/js/3.678742a9.chunk.js.map",
+    "main.js": "/avalon-voice-pwa/static/js/main.53fd2790.chunk.js",
+    "main.js.map": "/avalon-voice-pwa/static/js/main.53fd2790.chunk.js.map",
+    "runtime-main.js": "/avalon-voice-pwa/static/js/runtime-main.d0a6c866.js",
+    "runtime-main.js.map": "/avalon-voice-pwa/static/js/runtime-main.d0a6c866.js.map",
+    "static/js/2.2aad6420.chunk.js": "/avalon-voice-pwa/static/js/2.2aad6420.chunk.js",
+    "static/js/2.2aad6420.chunk.js.map": "/avalon-voice-pwa/static/js/2.2aad6420.chunk.js.map",
+    "static/js/3.119c16d0.chunk.js": "/avalon-voice-pwa/static/js/3.119c16d0.chunk.js",
+    "static/js/3.119c16d0.chunk.js.map": "/avalon-voice-pwa/static/js/3.119c16d0.chunk.js.map",
     "index.html": "/avalon-voice-pwa/index.html",
     "service-worker.js": "/avalon-voice-pwa/service-worker.js",
     "service-worker.js.map": "/avalon-voice-pwa/service-worker.js.map",
     "static/css/main.8c8b27cf.chunk.css.map": "/avalon-voice-pwa/static/css/main.8c8b27cf.chunk.css.map",
-    "static/js/2.97ea9296.chunk.js.LICENSE.txt": "/avalon-voice-pwa/static/js/2.97ea9296.chunk.js.LICENSE.txt"
+    "static/js/2.2aad6420.chunk.js.LICENSE.txt": "/avalon-voice-pwa/static/js/2.2aad6420.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.9abf124a.js",
-    "static/js/2.97ea9296.chunk.js",
+    "static/js/runtime-main.d0a6c866.js",
+    "static/js/2.2aad6420.chunk.js",
     "static/css/main.8c8b27cf.chunk.css",
-    "static/js/main.76e3faa0.chunk.js"
+    "static/js/main.53fd2790.chunk.js"
   ]
 }
