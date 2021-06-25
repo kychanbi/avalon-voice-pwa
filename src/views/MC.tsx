@@ -33,19 +33,23 @@ const CurrentSettingDisplay = ({ gameSetting }: settingDisplayProps) => {
   return (
     <Box>
       <Typography variant="subtitle1">
-        Total number of players:
+        總人數:
         {' '}
         {totalNumberOfPlayer}
       </Typography>
       <Typography variant="subtitle1">
-        Total number of Good players:
+        好人:
         {' '}
         {numberOfGood}
+        {' '}
+        個
       </Typography>
       <Typography variant="subtitle1">
-        Total number of Evil players:
+        壞人:
         {' '}
         {numberOfEvil}
+        {' '}
+        個
       </Typography>
     </Box>
   );
@@ -151,7 +155,7 @@ export const MCPage = () => {
   const {
     scriptDisplay, allSetting, playScript,
   } = useMCPageHook();
-
+  // TODO : add loading state when SpeechSynthesisVoice is not loaded
   return (
     <Card variant="outlined" className={classes.mcCard}>
       <CurrentSettingDisplay gameSetting={allSetting} />

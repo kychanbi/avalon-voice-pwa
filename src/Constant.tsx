@@ -1,4 +1,4 @@
-import { PresetSetting } from "./state/playerSetting";
+import { PresetSetting } from './state/playerSetting';
 
 interface NumberOfPlayers {
   good: number,
@@ -10,7 +10,7 @@ interface ConstantsInterface {
     Record<string, NumberOfPlayers>,
   label:
     Record<string, string>,
-  voice:string,
+  langs:string[],
   presets: { [key: string]: PresetSetting; }
 }
 
@@ -48,36 +48,36 @@ const Constants: ConstantsInterface = {
     isOberonPresent: '奧柏倫',
     isLancelotPresent: '蘭斯洛特',
   },
-  voice: 'zh-HK',
+  langs: ['zh-HK', 'yue_HK_#Hant'],
   presets: {
-    "preset-6": {
-      totalNumberOfPlayer: "6",
+    'preset-6': {
+      totalNumberOfPlayer: '6',
       isPercivalPresent: false,
       isMordredPresent: true,
       isMorganaPresent: false,
       isOberonPresent: false,
       isLancelotPresent: true,
-      desc:"經典六人"
+      desc: '經典六人',
     },
-    "preset-7": {
-      totalNumberOfPlayer: "7",
+    'preset-7': {
+      totalNumberOfPlayer: '7',
       isPercivalPresent: false,
       isMordredPresent: true,
       isMorganaPresent: false,
       isOberonPresent: false,
       isLancelotPresent: true,
-      desc:"經典七人"
+      desc: '經典七人',
     },
-    "preset-8": {
-      totalNumberOfPlayer: "8",
+    'preset-8': {
+      totalNumberOfPlayer: '8',
       isPercivalPresent: true,
       isMordredPresent: true,
       isMorganaPresent: true,
       isOberonPresent: false,
       isLancelotPresent: true,
-      desc:"經典八人"
-    }
-  }
+      desc: '經典八人',
+    },
+  },
 };
 Object.freeze(Constants);
 

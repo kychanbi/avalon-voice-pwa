@@ -5,7 +5,7 @@ import {
   MenuItem,
   makeStyles,
   FormControl, FormControlLabel, Checkbox, FormGroup, Slider, Typography, Fab,
-  Button
+  Button, Container, ButtonGroup,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import {
@@ -18,7 +18,7 @@ const useStyle = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     width: '70%',
     height: '80%',
-    padding: '3em',
+    padding: '5em 3em',
     minWidth: 320,
   },
   selectFormControl: {
@@ -35,8 +35,8 @@ const useStyle = makeStyles((theme) => ({
     cursor: 'pointer',
   },
   presetBtn: {
-    marginRight: theme.spacing(2),
-  }
+    margin: `${theme.spacing(2)}px 0`,
+  },
 }));
 
 const labels = Constants.label;
@@ -44,9 +44,6 @@ const labels = Constants.label;
 const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
   const classes = useStyle();
   const { allSetting, editSetting, editAllCharacterSettings } = useContext(SettingContext);
-  // const [currNumOfPlayers, setCurrNumOfPlayers] = useState<string>(
-  //   allSetting.totalNumberOfPlayer ?? defaultCharacterSetting.totalNumberOfPlayer,
-  // );
   const [formState, setFormState] = useState<SettingFormState>(
     allSetting ?? defaultFormSettingState,
   );
@@ -65,33 +62,32 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
     event: React.ChangeEvent<{}>,
     value: number | number[],
   ) => {
-    // console.log(event)
-    // const name = event.target.name as string;
     if (Array.isArray(value)) return;
     setFormState({ ...formState, [name]: value });
     editSetting(name, value);
   };
 
-    const handlePresetClick = (id: string) => {
-    const setting =  Constants.presets[id];
+  const handlePresetClick = (id: string) => {
+    const setting = Constants.presets[id];
     setFormState({ ...formState, ...setting });
     editAllCharacterSettings(setting);
-  }
+  };
 
   return (
     <div className={classes.settingTab}>
       <Fab className={classes.closeBtn} onClick={closeDialog}>
         <CloseIcon />
       </Fab>
-
-      {
-        Object.keys(Constants.presets).map(key =>
-          <Button className={classes.presetBtn} variant="contained" color="primary" id={key} onClick={(event => handlePresetClick(key))}> {Constants.presets[key].desc}</Button>
-        )
-      }
-
+      <ButtonGroup  className={classes.presetBtn} color="primary" >
+        {Object.keys(Constants.presets).map((key) => (
+          <Button  key={key} id={key} onClick={(() => handlePresetClick(key))}>
+            {' '}
+            {Constants.presets[key].desc}
+          </Button>
+        ))}
+      </ButtonGroup>
       <FormControl className={classes.selectFormControl}>
-        <InputLabel>Number of Player</InputLabel>
+        <InputLabel>總人數</InputLabel>
         <Select
           labelId="select-total-number-of-player-label"
           id="select-total-number-of-player"

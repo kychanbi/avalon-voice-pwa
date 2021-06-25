@@ -10,7 +10,7 @@ export interface CharacterSetting {
   isLancelotPresent: boolean,
 }
 
-export interface AllSetting extends CharacterSetting,VoiceSetting {
+export interface AllSetting extends CharacterSetting, VoiceSetting {
   numberOfGood: number,
   numberOfEvil: number,
 }
@@ -20,11 +20,12 @@ export interface VoiceSetting {
   countingRate: number,
 }
 
-export interface PresetSetting extends CharacterSetting{
+export interface PresetSetting extends CharacterSetting {
   desc: string
 }
 
-export interface SettingFormState extends VoiceSetting, CharacterSetting{}
+export interface SettingFormState extends VoiceSetting, CharacterSetting {
+}
 
 export const defaultFormSettingState: SettingFormState = {
   totalNumberOfPlayer: '5',
@@ -59,7 +60,7 @@ interface GoodEvilNumber {
   numberOfEvil: number
 }
 
-function calcGoodEvilNumber(total: string): GoodEvilNumber {
+function calcGoodEvilNumber(total: string): GoodEvilNumber{
   return {
     numberOfGood: Constants.totalNumberOfPlayers[total].good,
     numberOfEvil: Constants.totalNumberOfPlayers[total].evil,
@@ -89,12 +90,11 @@ export const SettingContextProvider = ({ children }: SettingContextProviderProp)
   const [allSetting, setAllSetting] = useState<AllSetting>(
     defaultAllSetting,
   );
-  const editAllCharacterSettings = (value: CharacterSetting) => {    
+  const editAllCharacterSettings = (value: CharacterSetting) => {
     const tempSetting = { ...currentSetting, ...value };
     setCurrentSetting(tempSetting);
   };
   const editSetting = (settingType: SettingProps, value: any) => {
-    console.log('editSetting', settingType, value);
     const tempSetting = { ...currentSetting, [settingType]: value };
     setCurrentSetting(tempSetting);
   };
@@ -108,7 +108,7 @@ export const SettingContextProvider = ({ children }: SettingContextProviderProp)
     setAllSetting(tempSetting);
   }, [currentSetting]);
   return (
-    <SettingContext.Provider value={{ allSetting, editSetting, editAllCharacterSettings}}>
+    <SettingContext.Provider value={{ allSetting, editSetting, editAllCharacterSettings }}>
       {children}
     </SettingContext.Provider>
   );
