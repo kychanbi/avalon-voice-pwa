@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
-import { Dialog, Fab, makeStyles } from '@material-ui/core';
-import EditIcon from '@material-ui/icons/Edit';
-import { SettingTab } from './SettingTab';
-import { SettingContextProvider } from '../state/playerSetting';
-import { MCPage } from './MC';
+import React, {
+  useCallback, useContext, useMemo, useState,
+} from 'react';
+import {
+  createMuiTheme, Dialog, Fab, makeStyles, MuiThemeProvider,
+} from '@material-ui/core';
 import SettingsIcon from '@material-ui/icons/Settings';
+import BrightnessMediumIcon from '@material-ui/icons/BrightnessMedium';
+import { SettingTab } from './SettingTab';
+import { SettingContext } from '../state/playerSetting';
+import { MCPage } from './MC';
+import { Constants } from '../Constant';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
@@ -19,10 +25,27 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(3),
     right: theme.spacing(3),
   },
+  fabLeft: {
+    position: 'absolute',
+    bottom: theme.spacing(3),
+    left: theme.spacing(3),
+  },
 }));
 
 export const Main = () => {
   const classes = useStyles();
+  const { allSetting, editSetting } = useContext(SettingContext);
+  const [isDarkModeCurr, setIsDarkModeCurr] = useState<boolean>(allSetting.isDarkMode);
+  const toggleDarkMode = useCallback(() => {
+    const { isDarkMode } = allSetting;
+    editSetting('isDarkMode', !isDarkMode);
+    // setIsDarkModeCurr(!isDarkModeCurr)
+  }, [allSetting.isDarkMode, editSetting]);
+
+  const appliedTheme = useMemo(
+    () => createMuiTheme(allSetting.isDarkMode ? Constants.theme.dark : Constants.theme.light),
+    [allSetting],
+  );
 
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(true);
   const btnOnClick = () => {
@@ -33,7 +56,7 @@ export const Main = () => {
   };
 
   return (
-    <SettingContextProvider>
+    <MuiThemeProvider theme={appliedTheme}>
       <div className={classes.root}>
         <MCPage />
         <Dialog open={isDialogOpen} onClose={closeDialog} fullWidth>
@@ -42,7 +65,10 @@ export const Main = () => {
         <Fab color="secondary" aria-label="edit" onClick={btnOnClick} className={classes.fab}>
           <SettingsIcon />
         </Fab>
+        <Fab color="secondary" aria-label="toggle dark mode" onClick={toggleDarkMode} className={classes.fabLeft}>
+          <BrightnessMediumIcon />
+        </Fab>
       </div>
-    </SettingContextProvider>
+    </MuiThemeProvider>
   );
 };

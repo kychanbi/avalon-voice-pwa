@@ -78,9 +78,9 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
       <Fab className={classes.closeBtn} onClick={closeDialog}>
         <CloseIcon />
       </Fab>
-      <ButtonGroup  className={classes.presetBtn} color="primary" >
+      <ButtonGroup className={classes.presetBtn} color='default'>
         {Object.keys(Constants.presets).map((key) => (
-          <Button  key={key} id={key} onClick={(() => handlePresetClick(key))}>
+          <Button key={key} id={key} onClick={(() => handlePresetClick(key))}>
             {' '}
             {Constants.presets[key].desc}
           </Button>

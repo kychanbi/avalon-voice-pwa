@@ -13,6 +13,7 @@ export interface CharacterSetting {
 export interface AllSetting extends CharacterSetting, VoiceSetting {
   numberOfGood: number,
   numberOfEvil: number,
+  isDarkMode: boolean,
 }
 
 export interface VoiceSetting {
@@ -25,6 +26,7 @@ export interface PresetSetting extends CharacterSetting {
 }
 
 export interface SettingFormState extends VoiceSetting, CharacterSetting {
+  isDarkMode: boolean,
 }
 
 export const defaultFormSettingState: SettingFormState = {
@@ -36,11 +38,14 @@ export const defaultFormSettingState: SettingFormState = {
   isLancelotPresent: false,
   speakingRate: 0.8,
   countingRate: 0.9,
+  isDarkMode: false,
+
 };
 
 const defaultAllSetting: AllSetting = {
   numberOfGood: 3,
   numberOfEvil: 2,
+  // isDarkMode: false,
   ...defaultFormSettingState,
 };
 
@@ -51,6 +56,7 @@ export enum SettingProps {
   isMorganaPresent = 'isMorganaPresent',
   isOberonPresent = 'isOberonPresent',
   isLancelotPresent = 'isLancelotPresent',
+  isDarkMode = 'isDarkMode'
   // numberOfGood = 'numberOfGood',
   // numberOfEvil = 'numberOfEvil',
 }
@@ -96,6 +102,8 @@ export const SettingContextProvider = ({ children }: SettingContextProviderProp)
   };
   const editSetting = (settingType: SettingProps, value: any) => {
     const tempSetting = { ...currentSetting, [settingType]: value };
+    // console.log('editAllCharacterSettings setCurrentSetting', settingType, value,tempSetting);
+
     setCurrentSetting(tempSetting);
   };
   useEffect(() => {

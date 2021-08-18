@@ -1,3 +1,5 @@
+import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
+import { purple } from '@material-ui/core/colors';
 import { PresetSetting } from './state/playerSetting';
 
 interface NumberOfPlayers {
@@ -11,7 +13,11 @@ interface ConstantsInterface {
   label:
     Record<string, string>,
   langs:string[],
-  presets: { [key: string]: PresetSetting; }
+  presets: { [key: string]: PresetSetting; },
+  theme: {
+    light: ThemeOptions,
+    dark: ThemeOptions
+  }
 }
 
 const Constants: ConstantsInterface = {
@@ -76,6 +82,22 @@ const Constants: ConstantsInterface = {
       isOberonPresent: false,
       isLancelotPresent: true,
       desc: '經典八人',
+    },
+  },
+  theme: {
+    light: {
+      palette: {
+        type: 'light',
+      },
+    },
+    dark: {
+      palette: {
+        type: 'dark',
+        // primary: {
+        //   // Purple and green play nicely together.
+        //   main: purple[500],
+        // },
+      },
     },
   },
 };
