@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
     position: 'relative',
     boxSizing: 'border-box',
-    padding: theme.spacing(2),
   },
   fab: {
     position: 'absolute',
@@ -35,11 +34,9 @@ const useStyles = makeStyles((theme) => ({
 export const Main = () => {
   const classes = useStyles();
   const { allSetting, editSetting } = useContext(SettingContext);
-  const [isDarkModeCurr, setIsDarkModeCurr] = useState<boolean>(allSetting.isDarkMode);
   const toggleDarkMode = useCallback(() => {
     const { isDarkMode } = allSetting;
     editSetting('isDarkMode', !isDarkMode);
-    // setIsDarkModeCurr(!isDarkModeCurr)
   }, [allSetting.isDarkMode, editSetting]);
 
   const appliedTheme = useMemo(

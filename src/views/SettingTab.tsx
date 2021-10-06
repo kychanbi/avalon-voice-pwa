@@ -5,11 +5,12 @@ import {
   MenuItem,
   makeStyles,
   FormControl, FormControlLabel, Checkbox, FormGroup, Slider, Typography, Fab,
-  Button, Container, ButtonGroup,
+  Button, ButtonGroup,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import {
-  defaultFormSettingState, SettingContext, SettingFormState,
+  AllSetting,
+  defaultAllSetting, SettingContext,
 } from '../state/playerSetting';
 import { Constants } from '../Constant';
 
@@ -44,15 +45,15 @@ const labels = Constants.label;
 const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
   const classes = useStyle();
   const { allSetting, editSetting, editAllCharacterSettings } = useContext(SettingContext);
-  const [formState, setFormState] = useState<SettingFormState>(
-    allSetting ?? defaultFormSettingState,
+  const [formState, setFormState] = useState<AllSetting>(
+    allSetting ?? defaultAllSetting,
   );
 
-  const handleChange = <K extends keyof SettingFormState>(
+  const handleChange = <K extends keyof AllSetting>(
     event: React.ChangeEvent<{ name?: string | undefined, value: unknown, checked?: boolean }>,
   ) => {
     const name = event.target.name as K;
-    const value = event.target.value as SettingFormState[K];
+    const value = event.target.value as AllSetting[K];
     const checked = event.target.checked as boolean;
     const newVal = checked === undefined ? value : checked;
     setFormState({ ...formState, [name]: newVal });

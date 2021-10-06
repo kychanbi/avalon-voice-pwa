@@ -11,9 +11,10 @@ export interface CharacterSetting {
 }
 
 export interface AllSetting extends CharacterSetting, VoiceSetting {
-  numberOfGood: number,
-  numberOfEvil: number,
+  // numberOfGood: number,
+  // numberOfEvil: number,
   isDarkMode: boolean,
+  isNewbieMode: boolean,
 }
 
 export interface VoiceSetting {
@@ -25,11 +26,16 @@ export interface PresetSetting extends CharacterSetting {
   desc: string
 }
 
-export interface SettingFormState extends VoiceSetting, CharacterSetting {
-  isDarkMode: boolean,
-}
+// export interface SettingFormState extends VoiceSetting, CharacterSetting {
+//   isDarkMode: boolean,
+//   isNewbieMode: boolean,
+// }
 
-export const defaultFormSettingState: SettingFormState = {
+// export const defaultFormSettingState: AllSetting = {
+
+// };
+
+export const defaultAllSetting: AllSetting = {
   totalNumberOfPlayer: '5',
   isPercivalPresent: false,
   isMordredPresent: false,
@@ -39,14 +45,7 @@ export const defaultFormSettingState: SettingFormState = {
   speakingRate: 0.8,
   countingRate: 0.9,
   isDarkMode: false,
-
-};
-
-const defaultAllSetting: AllSetting = {
-  numberOfGood: 3,
-  numberOfEvil: 2,
-  // isDarkMode: false,
-  ...defaultFormSettingState,
+  isNewbieMode: false,
 };
 
 export enum SettingProps {
@@ -66,7 +65,7 @@ interface GoodEvilNumber {
   numberOfEvil: number
 }
 
-function calcGoodEvilNumber(total: string): GoodEvilNumber{
+export function calcGoodEvilNumber(total: string): GoodEvilNumber{
   return {
     numberOfGood: Constants.totalNumberOfPlayers[total].good,
     numberOfEvil: Constants.totalNumberOfPlayers[total].evil,
@@ -92,29 +91,17 @@ interface SettingContextProviderProp {
 }
 
 export const SettingContextProvider = ({ children }: SettingContextProviderProp) => {
-  const [currentSetting, setCurrentSetting] = useState<SettingFormState>(defaultFormSettingState);
   const [allSetting, setAllSetting] = useState<AllSetting>(
     defaultAllSetting,
   );
   const editAllCharacterSettings = (value: CharacterSetting) => {
-    const tempSetting = { ...currentSetting, ...value };
-    setCurrentSetting(tempSetting);
+    const tempSetting = { ...allSetting, ...value };
+    setAllSetting(tempSetting);
   };
   const editSetting = (settingType: SettingProps, value: any) => {
-    const tempSetting = { ...currentSetting, [settingType]: value };
-    // console.log('editAllCharacterSettings setCurrentSetting', settingType, value,tempSetting);
-
-    setCurrentSetting(tempSetting);
-  };
-  useEffect(() => {
-    const { numberOfGood, numberOfEvil } = calcGoodEvilNumber(
-      currentSetting.totalNumberOfPlayer ?? defaultFormSettingState.totalNumberOfPlayer,
-    );
-    const tempSetting: AllSetting = {
-      ...currentSetting, numberOfGood, numberOfEvil,
-    };
+    const tempSetting = { ...allSetting, [settingType]: value };
     setAllSetting(tempSetting);
-  }, [currentSetting]);
+  };
   return (
     <SettingContext.Provider value={{ allSetting, editSetting, editAllCharacterSettings }}>
       {children}

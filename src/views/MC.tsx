@@ -6,7 +6,9 @@ import {
 } from '@material-ui/core';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import StopIcon from '@material-ui/icons/Stop';
-import { AllSetting, SettingContext } from '../state/playerSetting';
+import {
+  AllSetting, defaultAllSetting, SettingContext, calcGoodEvilNumber,
+} from '../state/playerSetting';
 import {
   endSpeaking, speak,
 } from '../utils/utils';
@@ -18,6 +20,7 @@ interface settingDisplayProps {
 const useStyles = makeStyles((theme) => ({
   mcCard: {
     padding: theme.spacing(2),
+    height: '100%',
   },
   playBtnWrap: {
     width: '100%',
@@ -28,8 +31,11 @@ const useStyles = makeStyles((theme) => ({
 
 const CurrentSettingDisplay = ({ gameSetting }: settingDisplayProps) => {
   const {
-    numberOfGood, numberOfEvil, totalNumberOfPlayer,
+    totalNumberOfPlayer,
   } = gameSetting;
+  const { numberOfGood, numberOfEvil } = calcGoodEvilNumber(
+    totalNumberOfPlayer ?? defaultAllSetting.totalNumberOfPlayer,
+  );
   return (
     <Box>
       <Typography variant="subtitle1">
