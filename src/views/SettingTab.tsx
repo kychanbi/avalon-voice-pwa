@@ -193,6 +193,17 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
             step={0.06}
           />
         </div>
+        <FormControlLabel
+          control={(
+            <Checkbox
+              checked={formState.isNewbieMode}
+              onChange={handleChange}
+              name="isNewbieMode"
+              color="primary"
+            />
+          )}
+          label={labels.isNewbieMode}
+        />
       </FormGroup>
     </div>
   );

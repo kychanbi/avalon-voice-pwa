@@ -53,6 +53,7 @@ const Constants: ConstantsInterface = {
     isMorganaPresent: '莫甘娜',
     isOberonPresent: '奧柏倫',
     isLancelotPresent: '蘭斯洛特',
+    isNewbieMode: '新手模式',
   },
   langs: ['zh-HK', 'yue_HK_#Hant'],
   presets: {

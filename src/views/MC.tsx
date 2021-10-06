@@ -60,18 +60,24 @@ const CurrentSettingDisplay = ({ gameSetting }: settingDisplayProps) => {
     </Box>
   );
 };
+
+interface GenerateScriptParams extends AllSetting{
+  numberOfEvil:number
+}
 const generateScript = ({
   isLancelotPresent,
   isMordredPresent,
   isMorganaPresent,
   isOberonPresent,
   isPercivalPresent,
-}: AllSetting): string[] => {
-  // let numOtherEvil = numberOfEvil;
+  isNewbieMode,
+  numberOfEvil,
+}: GenerateScriptParams): string[] => {
+  let numEvilOpenEyes = numberOfEvil;
   // isMordredPresent && numOtherEvil--;
-  // isOberonPresent && numOtherEvil--;
+  isOberonPresent && numEvilOpenEyes--;
   // isMorganaPresent && numOtherEvil--;
-  // isLancelotPresent && numOtherEvil--;
+  isLancelotPresent && numEvilOpenEyes--;
 
   // const script1 = '';
   // let scriptEvil = '所有人合埋眼，伸手握拳放係枱上，所有壞人開眼';
@@ -79,8 +85,10 @@ const generateScript = ({
   if (isLancelotPresent && isOberonPresent) scriptEvil = `除【奧柏倫同壞蘭斯洛特】以外，${scriptEvil}，壞蘭斯洛特豎起手指公`;
   else if (isOberonPresent) scriptEvil = `除左【奧柏倫】以外，${scriptEvil}`;
   else if (isLancelotPresent) scriptEvil = `除左【壞蘭斯洛特】以外，${scriptEvil}，壞蘭斯洛特豎起手指公`;
+  if (isNewbieMode) scriptEvil += `，總共有${numEvilOpenEyes}個壞人開眼`;
+
   const scriptEvil2 = '所有壞人合埋眼';
-  const scriptEvil3 = `${isMordredPresent ? '除左【莫德雷德】以外，' : ''}壞人豎起手指公。梅林擘大眼`;
+  const scriptEvil3 = `${isMordredPresent ? '除左【莫德雷德】以外，' : ''}壞人豎起手指公。梅林擘大眼${isNewbieMode ? `，總共有${numberOfEvil}隻手指公` : ''}`;
   // const numOfEvilShown = numberOfEvil - (+isMordredPresent);
   // const scriptGood = '';
   // ，`總共有 ${numOfEvilShown} 個壞人，如果數目有錯，請出聲。`;
@@ -133,8 +141,11 @@ const useMCPageHook = () => {
   const [scriptArr, setScriptText] = useState<string[]>([]);
   const [scriptDisplay, setScriptDisplay] = useState<(string | JSX.Element)[]>([]);
   const [areVoicesLoaded, setAreVoicesLoad] = useState(false);
+  const { numberOfEvil } = calcGoodEvilNumber(
+    allSetting.totalNumberOfPlayer,
+  );
   useEffect(() => {
-    const s = generateScript(allSetting);
+    const s = generateScript({ ...allSetting, numberOfEvil });
     const t = addLineBreaksToScript(s);
     setScriptText(s);
     setScriptDisplay(t);
