@@ -1,5 +1,4 @@
 import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
-import { purple } from '@material-ui/core/colors';
 import { PresetSetting } from './state/playerSetting';
 
 interface NumberOfPlayers {
@@ -54,13 +53,15 @@ const Constants: ConstantsInterface = {
     isOberonPresent: '奧柏倫',
     isLancelotPresent: '蘭斯洛特',
     isNewbieMode: '新手模式',
+    useLancelotAlternativeRules: '使用蘭斯洛特相認規則',
+
   },
   langs: ['zh-HK', 'yue_HK_#Hant'],
   presets: {
     'preset-6': {
       totalNumberOfPlayer: '6',
       isPercivalPresent: false,
-      isMordredPresent: true,
+      isMordredPresent: false,
       isMorganaPresent: false,
       isOberonPresent: false,
       isLancelotPresent: true,
@@ -69,9 +70,9 @@ const Constants: ConstantsInterface = {
     'preset-7': {
       totalNumberOfPlayer: '7',
       isPercivalPresent: false,
-      isMordredPresent: true,
+      isMordredPresent: false,
       isMorganaPresent: false,
-      isOberonPresent: false,
+      isOberonPresent: true,
       isLancelotPresent: true,
       desc: '經典七人',
     },

@@ -11,10 +11,9 @@ export interface CharacterSetting {
 }
 
 export interface AllSetting extends CharacterSetting, VoiceSetting {
-  // numberOfGood: number,
-  // numberOfEvil: number,
   isDarkMode: boolean,
   isNewbieMode: boolean,
+  useLancelotAlternativeRules: boolean,
 }
 
 export interface VoiceSetting {
@@ -42,6 +41,7 @@ export const defaultAllSetting: AllSetting = {
   isMorganaPresent: false,
   isOberonPresent: false,
   isLancelotPresent: false,
+  useLancelotAlternativeRules: false,
   speakingRate: 0.8,
   countingRate: 0.9,
   isDarkMode: false,

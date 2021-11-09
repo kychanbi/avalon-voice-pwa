@@ -65,6 +65,7 @@ interface GenerateScriptParams extends AllSetting{
   numberOfEvil:number
 }
 const generateScript = ({
+  useLancelotAlternativeRules,
   isLancelotPresent,
   isMordredPresent,
   isMorganaPresent,
@@ -81,6 +82,8 @@ const generateScript = ({
 
   // const script1 = '';
   // let scriptEvil = '所有人合埋眼，伸手握拳放係枱上，所有壞人開眼';
+  const scriptAlternativeRule = useLancelotAlternativeRules ? '兩個蘭斯洛特開眼確認身份' : '';
+  const scriptAlternativeRule2 = useLancelotAlternativeRules ? '兩個蘭斯洛特合埋眼' : '';
   let scriptEvil = '所有壞人擘大眼';
   if (isLancelotPresent && isOberonPresent) scriptEvil = `除【奧柏倫同壞蘭斯洛特】以外，${scriptEvil}，壞蘭斯洛特豎起手指公`;
   else if (isOberonPresent) scriptEvil = `除左【奧柏倫】以外，${scriptEvil}`;
@@ -98,6 +101,7 @@ const generateScript = ({
   const scriptGood4 = isPercivalPresent ? `【梅林】${isMorganaPresent ? '及【莫甘娜】' : ''} 收起手指公，【派西維爾】合埋眼。` : '';
   const scriptGood5 = '所有人擘大眼';
   return [
+    scriptAlternativeRule, scriptAlternativeRule2,
     scriptEvil, scriptEvil2, scriptEvil3,
     scriptGood2, scriptGood3, scriptGood4, scriptGood5,
   ].filter((s) => !!s);

@@ -159,6 +159,17 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
           )}
           label={labels.isLancelotPresent}
         />
+        <FormControlLabel
+          control={(
+            <Checkbox
+              checked={formState.useLancelotAlternativeRules}
+              onChange={handleChange}
+              name="useLancelotAlternativeRules"
+              color="primary"
+            />
+          )}
+          label={labels.useLancelotAlternativeRules}
+        />
         <div className={classes.sliderWrap}>
           <Typography gutterBottom>
             speaking speed :
