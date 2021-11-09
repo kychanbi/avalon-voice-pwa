@@ -5,7 +5,7 @@ import {
   MenuItem,
   makeStyles,
   FormControl, FormControlLabel, Checkbox, FormGroup, Slider, Typography, Fab,
-  Button, ButtonGroup,
+  Button, ButtonGroup, Tabs, Tab,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import {
@@ -13,13 +13,14 @@ import {
   defaultAllSetting, SettingContext,
 } from '../state/playerSetting';
 import { Constants } from '../Constant';
+import { TabPanel } from './components/TabPanel';
 
 const useStyle = makeStyles((theme) => ({
   settingTab: {
     backgroundColor: theme.palette.background.paper,
     width: '70%',
     height: '80%',
-    padding: '5em 3em',
+    padding: '3em 3em 5em',
     minWidth: 320,
   },
   selectFormControl: {
@@ -42,13 +43,21 @@ const useStyle = makeStyles((theme) => ({
 
 const labels = Constants.label;
 
+enum TabState {
+  Avalon = 'avalon',
+  Quest = 'quest'
+}
+
 const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
   const classes = useStyle();
   const { allSetting, editSetting, editAllCharacterSettings } = useContext(SettingContext);
   const [formState, setFormState] = useState<AllSetting>(
     allSetting ?? defaultAllSetting,
   );
-
+  const [tabState, setTabState] = useState<TabState>(TabState.Avalon);
+  const handleSwitchTab = (event: React.ChangeEvent<{}>, newValue: TabState) => {
+    setTabState(newValue);
+  };
   const handleChange = <K extends keyof AllSetting>(
     event: React.ChangeEvent<{ name?: string | undefined, value: unknown, checked?: boolean }>,
   ) => {
@@ -79,143 +88,152 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
       <Fab className={classes.closeBtn} onClick={closeDialog}>
         <CloseIcon />
       </Fab>
-      <ButtonGroup className={classes.presetBtn} color='default'>
-        {Object.keys(Constants.presets).map((key) => (
-          <Button key={key} id={key} onClick={(() => handlePresetClick(key))}>
-            {' '}
-            {Constants.presets[key].desc}
-          </Button>
-        ))}
-      </ButtonGroup>
-      <FormControl className={classes.selectFormControl}>
-        <InputLabel>總人數</InputLabel>
-        <Select
-          labelId="select-total-number-of-player-label"
-          id="select-total-number-of-player"
-          value={formState.totalNumberOfPlayer}
-          onChange={handleChange}
-          name="totalNumberOfPlayer"
-        >
-          {Object.keys(
-            Constants.totalNumberOfPlayers,
-          ).map(
-            (n) => <MenuItem value={n} key={n}>{n}</MenuItem>,
-          )}
-        </Select>
-      </FormControl>
-      <FormGroup>
-        <FormControlLabel
-          control={(
-            <Checkbox
-              checked={formState.isPercivalPresent}
-              onChange={handleChange}
-              name="isPercivalPresent"
-              color="primary"
-            />
-          )}
-          label={labels.isPercivalPresent}
-        />
-        <FormControlLabel
-          control={(
-            <Checkbox
-              checked={formState.isMordredPresent}
-              onChange={handleChange}
-              name="isMordredPresent"
-              color="primary"
-            />
-          )}
-          label={labels.isMordredPresent}
-        />
-        <FormControlLabel
-          control={(
-            <Checkbox
-              checked={formState.isMorganaPresent}
-              onChange={handleChange}
-              name="isMorganaPresent"
-              color="primary"
-            />
-          )}
-          label={labels.isMorganaPresent}
-        />
-        <FormControlLabel
-          control={(
-            <Checkbox
-              checked={formState.isOberonPresent}
-              onChange={handleChange}
-              name="isOberonPresent"
-              color="primary"
-            />
-          )}
-          label={labels.isOberonPresent}
-        />
-        <FormControlLabel
-          control={(
-            <Checkbox
-              checked={formState.isLancelotPresent}
-              onChange={handleChange}
-              name="isLancelotPresent"
-              color="primary"
-            />
-          )}
-          label={labels.isLancelotPresent}
-        />
-        <FormControlLabel
-          control={(
-            <Checkbox
-              checked={formState.useLancelotAlternativeRules}
-              onChange={handleChange}
-              name="useLancelotAlternativeRules"
-              color="primary"
-            />
-          )}
-          label={labels.useLancelotAlternativeRules}
-        />
-        <div className={classes.sliderWrap}>
-          <Typography gutterBottom>
-            speaking speed :
-            {' '}
-            {formState.speakingRate}
-          </Typography>
-          <Slider
-            name="speakingRate"
-            defaultValue={formState.speakingRate}
-            value={formState.speakingRate}
-            onChange={handleSliderChange('speakingRate')}
-            valueLabelDisplay="auto"
-            min={0.5}
-            max={1.5}
-            step={0.05}
+      <Tabs value={tabState} onChange={handleSwitchTab} aria-label='tab'>
+        <Tab label='Avalon' value={TabState.Avalon} />
+        <Tab label='Quest' value={TabState.Quest} />
+      </Tabs>
+      <TabPanel value={TabState.Avalon} currentTab={tabState}>
+        <ButtonGroup className={classes.presetBtn} color='default'>
+          {Object.keys(Constants.presets).map((key) => (
+            <Button key={key} id={key} onClick={(() => handlePresetClick(key))}>
+              {' '}
+              {Constants.presets[key].desc}
+            </Button>
+          ))}
+        </ButtonGroup>
+        <FormControl className={classes.selectFormControl}>
+          <InputLabel>總人數</InputLabel>
+          <Select
+            labelId='select-total-number-of-player-label'
+            id='select-total-number-of-player'
+            value={formState.totalNumberOfPlayer}
+            onChange={handleChange}
+            name='totalNumberOfPlayer'
+          >
+            {Object.keys(
+              Constants.totalNumberOfPlayers,
+            ).map(
+              (n) => <MenuItem value={n} key={n}>{n}</MenuItem>,
+            )}
+          </Select>
+        </FormControl>
+        <FormGroup>
+          <FormControlLabel
+            control={(
+              <Checkbox
+                checked={formState.isPercivalPresent}
+                onChange={handleChange}
+                name='isPercivalPresent'
+                color='primary'
+              />
+            )}
+            label={labels.isPercivalPresent}
           />
-        </div>
-        <div className={classes.sliderWrap}>
-          <Typography gutterBottom>
-            counting speed :
-            {' '}
-            {formState.countingRate}
-          </Typography>
-          <Slider
-            name="countingRate"
-            defaultValue={formState.countingRate}
-            value={formState.countingRate}
-            onChange={handleSliderChange('countingRate')}
-            valueLabelDisplay="auto"
-            min={0.6}
-            max={1.6}
-            step={0.06}
+          <FormControlLabel
+            control={(
+              <Checkbox
+                checked={formState.isMordredPresent}
+                onChange={handleChange}
+                name='isMordredPresent'
+                color='primary'
+              />
+            )}
+            label={labels.isMordredPresent}
           />
-        </div>
-        <FormControlLabel
-          control={(
-            <Checkbox
-              checked={formState.isNewbieMode}
-              onChange={handleChange}
-              name="isNewbieMode"
-              color="primary"
+          <FormControlLabel
+            control={(
+              <Checkbox
+                checked={formState.isMorganaPresent}
+                onChange={handleChange}
+                name='isMorganaPresent'
+                color='primary'
+              />
+            )}
+            label={labels.isMorganaPresent}
+          />
+          <FormControlLabel
+            control={(
+              <Checkbox
+                checked={formState.isOberonPresent}
+                onChange={handleChange}
+                name='isOberonPresent'
+                color='primary'
+              />
+            )}
+            label={labels.isOberonPresent}
+          />
+          <FormControlLabel
+            control={(
+              <Checkbox
+                checked={formState.isLancelotPresent}
+                onChange={handleChange}
+                name='isLancelotPresent'
+                color='primary'
+              />
+            )}
+            label={labels.isLancelotPresent}
+          />
+          <FormControlLabel
+            control={(
+              <Checkbox
+                checked={formState.useLancelotAlternativeRules}
+                onChange={handleChange}
+                name='useLancelotAlternativeRules'
+                color='primary'
+              />
+            )}
+            label={labels.useLancelotAlternativeRules}
+          />
+          <div className={classes.sliderWrap}>
+            <Typography gutterBottom>
+              speaking speed :
+              {' '}
+              {formState.speakingRate}
+            </Typography>
+            <Slider
+              name='speakingRate'
+              defaultValue={formState.speakingRate}
+              value={formState.speakingRate}
+              onChange={handleSliderChange('speakingRate')}
+              valueLabelDisplay='auto'
+              min={0.5}
+              max={1.5}
+              step={0.05}
             />
-          )}
-          label={labels.isNewbieMode}
-        />
-      </FormGroup>
+          </div>
+          <div className={classes.sliderWrap}>
+            <Typography gutterBottom>
+              counting speed :
+              {' '}
+              {formState.countingRate}
+            </Typography>
+            <Slider
+              name='countingRate'
+              defaultValue={formState.countingRate}
+              value={formState.countingRate}
+              onChange={handleSliderChange('countingRate')}
+              valueLabelDisplay='auto'
+              min={0.6}
+              max={1.6}
+              step={0.06}
+            />
+          </div>
+          <FormControlLabel
+            control={(
+              <Checkbox
+                checked={formState.isNewbieMode}
+                onChange={handleChange}
+                name='isNewbieMode'
+                color='primary'
+              />
+            )}
+            label={labels.isNewbieMode}
+          />
+        </FormGroup>
+      </TabPanel>
+      <TabPanel value={TabState.Quest} currentTab={tabState}>
+        under construction
+      </TabPanel>
     </div>
   );
 };

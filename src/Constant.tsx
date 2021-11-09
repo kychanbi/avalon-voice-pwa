@@ -1,5 +1,5 @@
-import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
 import { PresetSetting } from './state/playerSetting';
+import { ThemeOptions } from '@material-ui/core';
 
 interface NumberOfPlayers {
   good: number,
