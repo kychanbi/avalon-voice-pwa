@@ -52,6 +52,13 @@ const Constants: ConstantsInterface = {
     isMorganaPresent: '莫甘娜',
     isOberonPresent: '奧柏倫',
     isLancelotPresent: '蘭斯洛特',
+    isClericPresent: 'Cleric',
+    isBlindHunterPresent: 'BlindHunter',
+    isMutineerPresent: 'Mutineer',
+    isArthurPresent: 'Arthur',
+    isChangelingPresent: 'Changeling',
+    isScionPresent: 'Scion',
+    isMorganLeFayPresent: 'Morgan Le Fay',
     isNewbieMode: '新手模式',
     useLancelotAlternativeRules: '使用蘭斯洛特相認規則',
 

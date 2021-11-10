@@ -10,7 +10,7 @@ import {
 import CloseIcon from '@material-ui/icons/Close';
 import {
   AllSetting,
-  defaultAllSetting, SettingContext,
+  defaultAllSetting, GameMode, SettingContext,
 } from '../state/playerSetting';
 import { Constants } from '../Constant';
 import { TabPanel } from './components/TabPanel';
@@ -20,7 +20,7 @@ const useStyle = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     width: '70%',
     height: '80%',
-    padding: '3em 3em 5em',
+    padding: '3em 1.5em 5em',
     minWidth: 320,
   },
   selectFormControl: {
@@ -35,6 +35,7 @@ const useStyle = makeStyles((theme) => ({
     top: theme.spacing(3),
     right: theme.spacing(3),
     cursor: 'pointer',
+    zIndex: 10,
   },
   presetBtn: {
     margin: `${theme.spacing(2)}px 0`,
@@ -43,20 +44,15 @@ const useStyle = makeStyles((theme) => ({
 
 const labels = Constants.label;
 
-enum TabState {
-  Avalon = 'avalon',
-  Quest = 'quest'
-}
-
 const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
   const classes = useStyle();
   const { allSetting, editSetting, editAllCharacterSettings } = useContext(SettingContext);
   const [formState, setFormState] = useState<AllSetting>(
     allSetting ?? defaultAllSetting,
   );
-  const [tabState, setTabState] = useState<TabState>(TabState.Avalon);
-  const handleSwitchTab = (event: React.ChangeEvent<{}>, newValue: TabState) => {
-    setTabState(newValue);
+  const handleSwitchTab = (event: React.ChangeEvent<{}>, value: GameMode) => {
+    setFormState({ ...formState, gameMode: value });
+    editSetting('gameMode', value);
   };
   const handleChange = <K extends keyof AllSetting>(
     event: React.ChangeEvent<{ name?: string | undefined, value: unknown, checked?: boolean }>,
@@ -88,11 +84,11 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
       <Fab className={classes.closeBtn} onClick={closeDialog}>
         <CloseIcon />
       </Fab>
-      <Tabs value={tabState} onChange={handleSwitchTab} aria-label='tab'>
-        <Tab label='Avalon' value={TabState.Avalon} />
-        <Tab label='Quest' value={TabState.Quest} />
+      <Tabs value={formState.gameMode} onChange={handleSwitchTab} aria-label='tab'>
+        <Tab label='Avalon' value={GameMode.Avalon} />
+        <Tab label='Quest' value={GameMode.Quest} />
       </Tabs>
-      <TabPanel value={TabState.Avalon} currentTab={tabState}>
+      <TabPanel value={GameMode.Avalon} currentTab={formState.gameMode}>
         <ButtonGroup className={classes.presetBtn} color='default'>
           {Object.keys(Constants.presets).map((key) => (
             <Button key={key} id={key} onClick={(() => handlePresetClick(key))}>
@@ -184,40 +180,6 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
             )}
             label={labels.useLancelotAlternativeRules}
           />
-          <div className={classes.sliderWrap}>
-            <Typography gutterBottom>
-              speaking speed :
-              {' '}
-              {formState.speakingRate}
-            </Typography>
-            <Slider
-              name='speakingRate'
-              defaultValue={formState.speakingRate}
-              value={formState.speakingRate}
-              onChange={handleSliderChange('speakingRate')}
-              valueLabelDisplay='auto'
-              min={0.5}
-              max={1.5}
-              step={0.05}
-            />
-          </div>
-          <div className={classes.sliderWrap}>
-            <Typography gutterBottom>
-              counting speed :
-              {' '}
-              {formState.countingRate}
-            </Typography>
-            <Slider
-              name='countingRate'
-              defaultValue={formState.countingRate}
-              value={formState.countingRate}
-              onChange={handleSliderChange('countingRate')}
-              valueLabelDisplay='auto'
-              min={0.6}
-              max={1.6}
-              step={0.06}
-            />
-          </div>
           <FormControlLabel
             control={(
               <Checkbox
@@ -231,9 +193,122 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
           />
         </FormGroup>
       </TabPanel>
-      <TabPanel value={TabState.Quest} currentTab={tabState}>
-        under construction
+      <TabPanel value={GameMode.Quest} currentTab={formState.gameMode}>
+        <FormGroup>
+          <FormControlLabel
+            control={(
+              <Checkbox
+                checked={formState.isClericPresent}
+                onChange={handleChange}
+                name='isClericPresent'
+                color='primary'
+              />
+            )}
+            label={labels.isClericPresent}
+          />
+          <FormControlLabel
+            control={(
+              <Checkbox
+                checked={formState.isArthurPresent}
+                onChange={handleChange}
+                name='isArthurPresent'
+                color='primary'
+              />
+            )}
+            label={labels.isArthurPresent}
+          />
+          <FormControlLabel
+            control={(
+              <Checkbox
+                checked={formState.isBlindHunterPresent}
+                onChange={handleChange}
+                name='isBlindHunterPresent'
+                color='primary'
+              />
+            )}
+            label={labels.isBlindHunterPresent}
+          />
+          <FormControlLabel
+            control={(
+              <Checkbox
+                checked={formState.isMorganLeFayPresent}
+                onChange={handleChange}
+                name='isMorganLeFayPresent'
+                color='primary'
+              />
+            )}
+            label={labels.isMorganLeFayPresent}
+          />
+          <FormControlLabel
+            control={(
+              <Checkbox
+                checked={formState.isMutineerPresent}
+                onChange={handleChange}
+                name='isMutineerPresent'
+                color='primary'
+              />
+            )}
+            label={labels.isMutineerPresent}
+          />
+          <FormControlLabel
+            control={(
+              <Checkbox
+                checked={formState.isChangelingPresent}
+                onChange={handleChange}
+                name='isChangelingPresent'
+                color='primary'
+              />
+            )}
+            label={labels.isChangelingPresent}
+          />
+          <FormControlLabel
+            control={(
+              <Checkbox
+                checked={formState.isScionPresent}
+                onChange={handleChange}
+                name='isScionPresent'
+                color='primary'
+              />
+            )}
+            label={labels.isScionPresent}
+          />
+
+        </FormGroup>
       </TabPanel>
+      <div className={classes.sliderWrap}>
+        <Typography gutterBottom>
+          speaking speed :
+          {' '}
+          {formState.speakingRate}
+        </Typography>
+        <Slider
+          name='speakingRate'
+          defaultValue={formState.speakingRate}
+          value={formState.speakingRate}
+          onChange={handleSliderChange('speakingRate')}
+          valueLabelDisplay='auto'
+          min={0.5}
+          max={1.5}
+          step={0.05}
+        />
+      </div>
+      <div className={classes.sliderWrap}>
+        <Typography gutterBottom>
+          counting speed :
+          {' '}
+          {formState.countingRate}
+        </Typography>
+        <Slider
+          name='countingRate'
+          defaultValue={formState.countingRate}
+          value={formState.countingRate}
+          onChange={handleSliderChange('countingRate')}
+          valueLabelDisplay='auto'
+          min={0.6}
+          max={1.6}
+          step={0.06}
+        />
+      </div>
     </div>
   );
 };

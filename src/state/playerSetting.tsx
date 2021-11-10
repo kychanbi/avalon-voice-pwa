@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Constants } from '../Constant';
 
-export interface CharacterSetting {
+export interface AvalonCharacterSetting{
   totalNumberOfPlayer: string,
   isPercivalPresent: boolean,
   isMordredPresent: boolean,
@@ -10,19 +10,35 @@ export interface CharacterSetting {
   isLancelotPresent: boolean,
 }
 
-export interface AllSetting extends CharacterSetting, VoiceSetting {
+export interface QuestCharacterSetting{
+  isClericPresent: boolean,
+  isArthurPresent: boolean,
+  isBlindHunterPresent: boolean,
+  isMutineerPresent: boolean,
+  isChangelingPresent: boolean,
+  isScionPresent: boolean,
+  isMorganLeFayPresent: boolean,
+}
+
+export enum GameMode{
+  Avalon = 'avalon',
+  Quest = 'quest',
+}
+
+export interface AllSetting extends AvalonCharacterSetting, QuestCharacterSetting, VoiceSetting{
   isDarkMode: boolean,
   isNewbieMode: boolean,
   useLancelotAlternativeRules: boolean,
+  gameMode: GameMode
 }
 
-export interface VoiceSetting {
+export interface VoiceSetting{
   speakingRate: number,
   countingRate: number,
 }
 
-export interface PresetSetting extends CharacterSetting {
-  desc: string
+export interface PresetSetting extends AvalonCharacterSetting{
+  desc: string;
 }
 
 // export interface SettingFormState extends VoiceSetting, CharacterSetting {
@@ -46,21 +62,17 @@ export const defaultAllSetting: AllSetting = {
   countingRate: 0.9,
   isDarkMode: false,
   isNewbieMode: false,
+  gameMode: GameMode.Avalon,
+  isBlindHunterPresent: true,
+  isClericPresent: true,
+  isMutineerPresent: false,
+  isArthurPresent: false,
+  isChangelingPresent: false,
+  isMorganLeFayPresent: true,
+  isScionPresent: false,
 };
 
-export enum SettingProps {
-  totalNumberOfPlayer = 'totalNumberOfPlayer',
-  isPercivalPresent = 'isPercivalPresent',
-  isMordredPresent = 'isMordredPresent',
-  isMorganaPresent = 'isMorganaPresent',
-  isOberonPresent = 'isOberonPresent',
-  isLancelotPresent = 'isLancelotPresent',
-  isDarkMode = 'isDarkMode'
-  // numberOfGood = 'numberOfGood',
-  // numberOfEvil = 'numberOfEvil',
-}
-
-interface GoodEvilNumber {
+interface GoodEvilNumber{
   numberOfGood: number,
   numberOfEvil: number
 }
@@ -72,7 +84,7 @@ export function calcGoodEvilNumber(total: string): GoodEvilNumber{
   } as GoodEvilNumber;
 }
 
-interface SettingContextType {
+interface SettingContextType{
   allSetting: AllSetting,
   editSetting: Function,
   editAllCharacterSettings: Function
@@ -86,24 +98,31 @@ export const SettingContext = React.createContext<SettingContextType>({
   },
 });
 
-interface SettingContextProviderProp {
-  children: React.ReactNode
+interface SettingContextProviderProp{
+  children: React.ReactNode;
 }
 
 export const SettingContextProvider = ({ children }: SettingContextProviderProp) => {
   const [allSetting, setAllSetting] = useState<AllSetting>(
     defaultAllSetting,
   );
-  const editAllCharacterSettings = (value: CharacterSetting) => {
+  const editAllCharacterSettings = (value: AvalonCharacterSetting) => {
     const tempSetting = { ...allSetting, ...value };
     setAllSetting(tempSetting);
   };
-  const editSetting = (settingType: SettingProps, value: any) => {
-    const tempSetting = { ...allSetting, [settingType]: value };
+  const editSetting = (settingType: keyof AllSetting, value: any) => {
+    const tempSetting = {
+      ...allSetting,
+      [settingType]: value,
+    };
     setAllSetting(tempSetting);
   };
   return (
-    <SettingContext.Provider value={{ allSetting, editSetting, editAllCharacterSettings }}>
+    <SettingContext.Provider value={{
+      allSetting,
+      editSetting,
+      editAllCharacterSettings,
+    }}>
       {children}
     </SettingContext.Provider>
   );
