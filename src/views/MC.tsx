@@ -95,8 +95,9 @@ const generateQuestScript = ({
   const s5 = `${isMorganLeFayPresent && isArthurPresent ? 'Morgan Le Fay 收起手指公。Arthur 合埋眼' : ''}`;
   const s6 = `${isClericPresent ? 'First leader 如果係壞人就豎起手指公。Cleric 擘大眼' : ''}`;
   const s7 = `${isClericPresent ? 'First leader 收起手指公。Cleric 合埋眼' : ''}`;
+  const s8 = '所有人擘大眼';
 
-  return [s0, s2, s3, s4, s5, s6, s7].filter((s) => !!s);
+  return [s0, s2, s3, s4, s5, s6, s7, s8].filter((s) => !!s);
 };
 
 interface GenerateAvalonScriptParams extends AvalonCharacterSetting{
