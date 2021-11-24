@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/avalon-voice-pwa/static/css/main.8c8b27cf.chunk.css",
-    "main.js": "/avalon-voice-pwa/static/js/main.ee977b6d.chunk.js",
-    "main.js.map": "/avalon-voice-pwa/static/js/main.ee977b6d.chunk.js.map",
+    "main.js": "/avalon-voice-pwa/static/js/main.649e65b7.chunk.js",
+    "main.js.map": "/avalon-voice-pwa/static/js/main.649e65b7.chunk.js.map",
     "runtime-main.js": "/avalon-voice-pwa/static/js/runtime-main.5967873a.js",
     "runtime-main.js.map": "/avalon-voice-pwa/static/js/runtime-main.5967873a.js.map",
     "static/js/2.ac5831c8.chunk.js": "/avalon-voice-pwa/static/js/2.ac5831c8.chunk.js",
@@ -19,6 +19,6 @@
     "static/js/runtime-main.5967873a.js",
     "static/js/2.ac5831c8.chunk.js",
     "static/css/main.8c8b27cf.chunk.css",
-    "static/js/main.ee977b6d.chunk.js"
+    "static/js/main.649e65b7.chunk.js"
   ]
 }
