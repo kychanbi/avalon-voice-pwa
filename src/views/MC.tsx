@@ -135,7 +135,7 @@ const generateAvalonScript = ({
   if (isNewbieMode) scriptEvil += `，總共有${numEvilOpenEyes}個壞人開眼`;
 
   const scriptEvil2 = '所有壞人合埋眼';
-  const scriptEvil3 = `${isMordredPresent ? '除左【莫德雷德】以外，' : ''}壞人豎起手指公。梅林擘大眼${isNewbieMode ? `，總共有${numberOfEvil}隻手指公` : ''}`;
+  const scriptEvil3 = `${isMordredPresent ? '除左【莫德雷德】以外，' : ''}壞人豎起手指公。梅林擘大眼${isNewbieMode ? `，總共有${numberOfEvil - (isMordredPresent as unknown as number)}隻手指公` : ''}`;
   // const numOfEvilShown = numberOfEvil - (+isMordredPresent);
   // const scriptGood = '';
   // ，`總共有 ${numOfEvilShown} 個壞人，如果數目有錯，請出聲。`;
