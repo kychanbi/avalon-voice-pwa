@@ -30,12 +30,12 @@ const useStyles = makeStyles((theme) => ({
 const CurrentSettingDisplay = ({ gameSetting }: settingDisplayProps) => {
   const {
     totalNumberOfPlayer,
-  } = gameSetting;
+  } = gameSetting.avalonCharacterSetting;
   const {
     numberOfGood,
     numberOfEvil,
   } = calcGoodEvilNumber(
-    totalNumberOfPlayer ?? defaultAllSetting.totalNumberOfPlayer,
+    totalNumberOfPlayer ?? defaultAllSetting.avalonCharacterSetting.totalNumberOfPlayer,
   );
   return (
     <Box>
@@ -74,6 +74,7 @@ const generateQuestScript = ({
   isArthurPresent,
   isMorganLeFayPresent,
   isScionPresent,
+  isLancelotPresent,
 }: GenerateQuestScriptParams): string[] => {
   let s0: string;
   // let countUnknowEvil = (+isChangelingPresent as number) + (+isBlindHunterPresent as number) + (+isScionPresent as number) + (+isMutineerPresent as number);
@@ -85,7 +86,7 @@ const generateQuestScript = ({
     s0 = `除 ${s0} 以外，所有壞人擘大眼`;
   } else if (s_unknownEvils.length == 1){
     s0 = `除 ${s_unknownEvils} 以外，所有壞人擘大眼`;
-  }else{
+  } else{
     s0 = '所有壞人擘大眼';
   }
 
@@ -95,9 +96,11 @@ const generateQuestScript = ({
   const s5 = `${isMorganLeFayPresent && isArthurPresent ? 'Morgan Le Fay 收起手指公。Arthur 合埋眼' : ''}`;
   const s6 = `${isClericPresent ? 'First leader 如果係壞人就豎起手指公。Cleric 擘大眼' : ''}`;
   const s7 = `${isClericPresent ? 'First leader 收起手指公。Cleric 合埋眼' : ''}`;
-  const s8 = '所有人擘大眼';
+  const s8 = isLancelotPresent ? '兩個蘭斯洛特開眼確認身份' : '';
+  const s9 = isLancelotPresent ? '兩個蘭斯洛特合埋眼' : '';
+  const s99 = '所有人擘大眼';
 
-  return [s0, s2, s3, s4, s5, s6, s7, s8].filter((s) => !!s);
+  return [s0, s2, s3, s4, s5, s6, s7, s8,s9,s99].filter((s) => !!s);
 };
 
 interface GenerateAvalonScriptParams extends AvalonCharacterSetting{
@@ -186,20 +189,27 @@ const useMCPageHook = () => {
   // const synthesize = useSynthesize();
 
   const { allSetting } = useContext(SettingContext);
+  const {
+    questCharacterSetting,
+    avalonCharacterSetting,
+        isNewbieMode,
+  } = allSetting;
+
   const [scriptArr, setScriptText] = useState<string[]>([]);
   const [scriptDisplay, setScriptDisplay] = useState<(string | JSX.Element)[]>([]);
   const [areVoicesLoaded, setAreVoicesLoad] = useState(false);
   const { numberOfEvil } = calcGoodEvilNumber(
-    allSetting.totalNumberOfPlayer,
+    avalonCharacterSetting.totalNumberOfPlayer,
   );
   useEffect(() => {
     const s = allSetting.gameMode === GameMode.Avalon
       ? generateAvalonScript({
-        ...allSetting,
+        ...avalonCharacterSetting,
         numberOfEvil,
+        isNewbieMode,
       })
       : generateQuestScript({
-        ...allSetting,
+        ...questCharacterSetting,
       });
     const t = addLineBreaksToScript(s);
     setScriptText(s);

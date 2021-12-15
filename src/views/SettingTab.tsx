@@ -47,6 +47,7 @@ const labels = Constants.label;
 const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
   const classes = useStyle();
   const { allSetting, editSetting, editAllCharacterSettings } = useContext(SettingContext);
+  const { avalonCharacterSetting, questCharacterSetting } = allSetting;
   const [formState, setFormState] = useState<AllSetting>(
     allSetting ?? defaultAllSetting,
   );
@@ -61,8 +62,10 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
     const value = event.target.value as AllSetting[K];
     const checked = event.target.checked as boolean;
     const newVal = checked === undefined ? value : checked;
-    setFormState({ ...formState, [name]: newVal });
-    editSetting(name, newVal);
+
+
+      setFormState({ ...formState, [name]: newVal });
+      editSetting(name, newVal);
   };
   const handleSliderChange = (name: string) => (
     event: React.ChangeEvent<{}>,
@@ -102,9 +105,9 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
           <Select
             labelId='select-total-number-of-player-label'
             id='select-total-number-of-player'
-            value={formState.totalNumberOfPlayer}
+            value={avalonCharacterSetting.totalNumberOfPlayer}
             onChange={handleChange}
-            name='totalNumberOfPlayer'
+            name='avalonCharacterSetting.totalNumberOfPlayer'
           >
             {Object.keys(
               Constants.totalNumberOfPlayers,
@@ -117,9 +120,9 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
           <FormControlLabel
             control={(
               <Checkbox
-                checked={formState.isPercivalPresent}
+                checked={avalonCharacterSetting.isPercivalPresent}
                 onChange={handleChange}
-                name='isPercivalPresent'
+                name='avalonCharacterSetting.isPercivalPresent'
                 color='primary'
               />
             )}
@@ -128,9 +131,9 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
           <FormControlLabel
             control={(
               <Checkbox
-                checked={formState.isMordredPresent}
+                checked={avalonCharacterSetting.isMordredPresent}
                 onChange={handleChange}
-                name='isMordredPresent'
+                name='avalonCharacterSetting.isMordredPresent'
                 color='primary'
               />
             )}
@@ -139,9 +142,9 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
           <FormControlLabel
             control={(
               <Checkbox
-                checked={formState.isMorganaPresent}
+                checked={avalonCharacterSetting.isMorganaPresent}
                 onChange={handleChange}
-                name='isMorganaPresent'
+                name='avalonCharacterSetting.isMorganaPresent'
                 color='primary'
               />
             )}
@@ -150,9 +153,9 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
           <FormControlLabel
             control={(
               <Checkbox
-                checked={formState.isOberonPresent}
+                checked={avalonCharacterSetting.isOberonPresent}
                 onChange={handleChange}
-                name='isOberonPresent'
+                name='avalonCharacterSetting.isOberonPresent'
                 color='primary'
               />
             )}
@@ -161,9 +164,9 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
           <FormControlLabel
             control={(
               <Checkbox
-                checked={formState.isLancelotPresent}
+                checked={avalonCharacterSetting.isLancelotPresent}
                 onChange={handleChange}
-                name='isLancelotPresent'
+                name='avalonCharacterSetting.isLancelotPresent'
                 color='primary'
               />
             )}
@@ -172,9 +175,9 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
           <FormControlLabel
             control={(
               <Checkbox
-                checked={formState.useLancelotAlternativeRules}
+                checked={avalonCharacterSetting.useLancelotAlternativeRules}
                 onChange={handleChange}
-                name='useLancelotAlternativeRules'
+                name='avalonCharacterSetting.useLancelotAlternativeRules'
                 color='primary'
               />
             )}
@@ -198,9 +201,9 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
           <FormControlLabel
             control={(
               <Checkbox
-                checked={formState.isClericPresent}
+                checked={questCharacterSetting.isClericPresent}
                 onChange={handleChange}
-                name='isClericPresent'
+                name='questCharacterSetting.isClericPresent'
                 color='primary'
               />
             )}
@@ -209,9 +212,9 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
           <FormControlLabel
             control={(
               <Checkbox
-                checked={formState.isArthurPresent}
+                checked={questCharacterSetting.isArthurPresent}
                 onChange={handleChange}
-                name='isArthurPresent'
+                name='questCharacterSetting.isArthurPresent'
                 color='primary'
               />
             )}
@@ -220,9 +223,9 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
           <FormControlLabel
             control={(
               <Checkbox
-                checked={formState.isBlindHunterPresent}
+                checked={questCharacterSetting.isBlindHunterPresent}
                 onChange={handleChange}
-                name='isBlindHunterPresent'
+                name='questCharacterSetting.isBlindHunterPresent'
                 color='primary'
               />
             )}
@@ -231,9 +234,9 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
           <FormControlLabel
             control={(
               <Checkbox
-                checked={formState.isMorganLeFayPresent}
+                checked={questCharacterSetting.isMorganLeFayPresent}
                 onChange={handleChange}
-                name='isMorganLeFayPresent'
+                name='questCharacterSetting.isMorganLeFayPresent'
                 color='primary'
               />
             )}
@@ -242,9 +245,9 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
           <FormControlLabel
             control={(
               <Checkbox
-                checked={formState.isMutineerPresent}
+                checked={questCharacterSetting.isMutineerPresent}
                 onChange={handleChange}
-                name='isMutineerPresent'
+                name='questCharacterSetting.isMutineerPresent'
                 color='primary'
               />
             )}
@@ -253,9 +256,9 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
           <FormControlLabel
             control={(
               <Checkbox
-                checked={formState.isChangelingPresent}
+                checked={questCharacterSetting.isChangelingPresent}
                 onChange={handleChange}
-                name='isChangelingPresent'
+                name='questCharacterSetting.isChangelingPresent'
                 color='primary'
               />
             )}
@@ -264,15 +267,25 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
           <FormControlLabel
             control={(
               <Checkbox
-                checked={formState.isScionPresent}
+                checked={questCharacterSetting.isScionPresent}
                 onChange={handleChange}
-                name='isScionPresent'
+                name='questCharacterSetting.isScionPresent'
                 color='primary'
               />
             )}
             label={labels.isScionPresent}
           />
-
+          <FormControlLabel
+            control={(
+              <Checkbox
+                checked={questCharacterSetting.isLancelotPresent}
+                onChange={handleChange}
+                name='questCharacterSetting.isLancelotPresent'
+                color='primary'
+              />
+            )}
+            label={labels.isLancelotPresent}
+          />
         </FormGroup>
       </TabPanel>
       <div className={classes.sliderWrap}>

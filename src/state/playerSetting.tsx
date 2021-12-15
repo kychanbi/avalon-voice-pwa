@@ -8,6 +8,7 @@ export interface AvalonCharacterSetting{
   isMorganaPresent: boolean,
   isOberonPresent: boolean,
   isLancelotPresent: boolean,
+  useLancelotAlternativeRules: boolean,
 }
 
 export interface QuestCharacterSetting{
@@ -18,6 +19,7 @@ export interface QuestCharacterSetting{
   isChangelingPresent: boolean,
   isScionPresent: boolean,
   isMorganLeFayPresent: boolean,
+  isLancelotPresent: boolean,
 }
 
 export enum GameMode{
@@ -25,10 +27,11 @@ export enum GameMode{
   Quest = 'quest',
 }
 
-export interface AllSetting extends AvalonCharacterSetting, QuestCharacterSetting, VoiceSetting{
+export interface AllSetting extends VoiceSetting{
+  avalonCharacterSetting: AvalonCharacterSetting,
+  questCharacterSetting: QuestCharacterSetting,
   isDarkMode: boolean,
   isNewbieMode: boolean,
-  useLancelotAlternativeRules: boolean,
   gameMode: GameMode
 }
 
@@ -51,25 +54,30 @@ export interface PresetSetting extends AvalonCharacterSetting{
 // };
 
 export const defaultAllSetting: AllSetting = {
-  totalNumberOfPlayer: '5',
-  isPercivalPresent: false,
-  isMordredPresent: false,
-  isMorganaPresent: false,
-  isOberonPresent: false,
-  isLancelotPresent: false,
-  useLancelotAlternativeRules: false,
+  avalonCharacterSetting: {
+    totalNumberOfPlayer: '5',
+    isPercivalPresent: false,
+    isMordredPresent: false,
+    isMorganaPresent: false,
+    isOberonPresent: false,
+    isLancelotPresent: false,
+    useLancelotAlternativeRules: false,
+  },
   speakingRate: 0.8,
   countingRate: 0.9,
   isDarkMode: false,
   isNewbieMode: false,
   gameMode: GameMode.Avalon,
-  isBlindHunterPresent: true,
-  isClericPresent: true,
-  isMutineerPresent: false,
-  isArthurPresent: false,
-  isChangelingPresent: false,
-  isMorganLeFayPresent: true,
-  isScionPresent: false,
+  questCharacterSetting: {
+    isBlindHunterPresent: true,
+    isClericPresent: true,
+    isMutineerPresent: false,
+    isArthurPresent: false,
+    isChangelingPresent: false,
+    isMorganLeFayPresent: true,
+    isScionPresent: false,
+    isLancelotPresent: false,
+  },
 };
 
 interface GoodEvilNumber{
@@ -107,22 +115,40 @@ export const SettingContextProvider = ({ children }: SettingContextProviderProp)
     defaultAllSetting,
   );
   const editAllCharacterSettings = (value: AvalonCharacterSetting) => {
-    const tempSetting = { ...allSetting, ...value };
-    setAllSetting(tempSetting);
-  };
-  const editSetting = (settingType: keyof AllSetting, value: any) => {
-    const tempSetting = {
+    let tempSetting = allSetting.avalonCharacterSetting;
+    tempSetting = { ...tempSetting, ...value };
+    setAllSetting({
       ...allSetting,
-      [settingType]: value,
-    };
-    setAllSetting(tempSetting);
+      avalonCharacterSetting: tempSetting,
+    });
+  };
+  const editSetting = (name: string, value: any) => {
+    if (name.includes('.')){
+      const [subSetting, settingType] = name.split('.');
+      let tempSetting = allSetting[subSetting as 'avalonCharacterSetting' | 'questCharacterSetting'];
+      tempSetting = {
+        ...tempSetting,
+        [settingType]: value,
+      };
+      setAllSetting({
+        ...allSetting,
+        [subSetting]: tempSetting,
+      });
+    } else{
+      const tempSetting = {
+        ...allSetting,
+        [name]: value,
+      };
+      setAllSetting(tempSetting);
+    }
   };
   return (
     <SettingContext.Provider value={{
       allSetting,
       editSetting,
       editAllCharacterSettings,
-    }}>
+    }}
+    >
       {children}
     </SettingContext.Provider>
   );

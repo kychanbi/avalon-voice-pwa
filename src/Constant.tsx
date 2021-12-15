@@ -72,6 +72,7 @@ const Constants: ConstantsInterface = {
       isMorganaPresent: false,
       isOberonPresent: false,
       isLancelotPresent: true,
+      useLancelotAlternativeRules: false,
       desc: '經典六人',
     },
     'preset-7': {
@@ -81,6 +82,7 @@ const Constants: ConstantsInterface = {
       isMorganaPresent: false,
       isOberonPresent: true,
       isLancelotPresent: true,
+      useLancelotAlternativeRules: false,
       desc: '經典七人',
     },
     'preset-8': {
@@ -90,6 +92,7 @@ const Constants: ConstantsInterface = {
       isMorganaPresent: true,
       isOberonPresent: false,
       isLancelotPresent: true,
+      useLancelotAlternativeRules: false,
       desc: '經典八人',
     },
   },
