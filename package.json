@@ -1,6 +1,6 @@
 {
   "name": "avalon-pwa",
-  "homepage": "https://kychanbi.github.io/avalon-voice-pwa",
+  "homepage": "https://avalon-voice-pwa.vercel.app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
