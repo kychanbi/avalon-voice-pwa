@@ -103,13 +103,13 @@ const generateQuestScript = ({
   return [s0, s2, s3, s4, s5, s6, s7, s8,s9,s99].filter((s) => !!s);
 };
 
-interface GenerateAvalonScriptParams extends AvalonCharacterSetting{
+type GenerateAvalonScriptParams = Omit<AvalonCharacterSetting,'totalNumberOfPlayer'> & {
   numberOfEvil: number,
   useLancelotAlternativeRules: boolean,
   isNewbieMode: boolean,
 }
 
-const generateAvalonScript = ({
+export const generateAvalonScript = ({
   useLancelotAlternativeRules,
   isLancelotPresent,
   isMordredPresent,

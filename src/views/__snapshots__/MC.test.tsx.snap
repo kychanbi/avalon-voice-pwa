@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Script generation testing 5 ppl game (0 special evils) script generated correctly 1`] = `"[\\"所有壞人擘大眼\\",\\"所有壞人合埋眼\\",\\"壞人豎起手指公。梅林擘大眼\\",\\"梅林合埋眼，壞人收起手指公\\",\\"所有人擘大眼\\"]"`;
