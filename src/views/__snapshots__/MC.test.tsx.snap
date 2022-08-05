@@ -1,3 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Script generation testing 5 ppl game (0 special evils) script generated correctly 1`] = `"[\\"所有壞人擘大眼\\",\\"所有壞人合埋眼\\",\\"壞人豎起手指公。梅林擘大眼\\",\\"梅林合埋眼，壞人收起手指公\\",\\"所有人擘大眼\\"]"`;
+exports[`Script generation testing (2 evils game) (0 special evils) script generated correctly 1`] = `"[\\"所有壞人擘大眼\\",\\"所有壞人合埋眼\\",\\"壞人豎起手指公。梅林擘大眼\\",\\"梅林合埋眼，壞人收起手指公\\",\\"所有人擘大眼\\"]"`;
+
+exports[`Script generation testing (2 evils game) (Mordred & Oberon present) newbie on script generated correctly 1`] = `"[\\"除左【奧柏倫】以外，所有壞人擘大眼\\",\\"所有壞人合埋眼\\",\\"除左【莫德雷德】以外，壞人豎起手指公。梅林擘大眼\\",\\"梅林合埋眼，壞人收起手指公\\",\\"所有人擘大眼\\"]"`;
+
+exports[`Script generation testing (2 evils game) (Mordred & Oberon present) script generated correctly 1`] = `"[\\"除左【奧柏倫】以外，所有壞人擘大眼\\",\\"所有壞人合埋眼\\",\\"除左【莫德雷德】以外，壞人豎起手指公。梅林擘大眼\\",\\"梅林合埋眼，壞人收起手指公\\",\\"所有人擘大眼\\"]"`;
+
+exports[`Script generation testing (2 evils game) (Mordred present) script generated correctly 1`] = `"[\\"所有壞人擘大眼\\",\\"所有壞人合埋眼\\",\\"除左【莫德雷德】以外，壞人豎起手指公。梅林擘大眼\\",\\"梅林合埋眼，壞人收起手指公\\",\\"所有人擘大眼\\"]"`;
+
+exports[`Script generation testing (3 evils game) (0 special evils) script generated correctly(newbie on) 1`] = `"[\\"所有壞人擘大眼，總共有3個壞人開眼\\",\\"所有壞人合埋眼\\",\\"壞人豎起手指公。梅林擘大眼，總共有3隻手指公\\",\\"梅林合埋眼，壞人收起手指公\\",\\"所有人擘大眼\\"]"`;
+
+exports[`Script generation testing (3 evils game) (Mordred Morgana Lancelot present) script generated correctly 1`] = `"[\\"除左【壞蘭斯洛特】以外，所有壞人擘大眼，壞蘭斯洛特豎起手指公\\",\\"所有壞人合埋眼\\",\\"除左【莫德雷德】以外，壞人豎起手指公。梅林擘大眼\\",\\"梅林合埋眼，壞人收起手指公\\",\\"【梅林】及【莫甘娜】 豎起手指公，【派西維爾】擘大眼。\\",\\"【梅林】及【莫甘娜】 收起手指公，【派西維爾】合埋眼。\\",\\"所有人擘大眼\\"]"`;
+
+exports[`Script generation testing (3 evils game) (Mordred Morgana Oberon present) script generated correctly 1`] = `"[\\"除左【奧柏倫】以外，所有壞人擘大眼\\",\\"所有壞人合埋眼\\",\\"除左【莫德雷德】以外，壞人豎起手指公。梅林擘大眼\\",\\"梅林合埋眼，壞人收起手指公\\",\\"【梅林】及【莫甘娜】 豎起手指公，【派西維爾】擘大眼。\\",\\"【梅林】及【莫甘娜】 收起手指公，【派西維爾】合埋眼。\\",\\"所有人擘大眼\\"]"`;
+
+exports[`Script generation testing (3 evils game) (Mordred Morgana present) script generated correctly 1`] = `"[\\"所有壞人擘大眼\\",\\"所有壞人合埋眼\\",\\"除左【莫德雷德】以外，壞人豎起手指公。梅林擘大眼\\",\\"梅林合埋眼，壞人收起手指公\\",\\"【梅林】及【莫甘娜】 豎起手指公，【派西維爾】擘大眼。\\",\\"【梅林】及【莫甘娜】 收起手指公，【派西維爾】合埋眼。\\",\\"所有人擘大眼\\"]"`;
+
+exports[`Script generation testing (3 evils game) (Mordred present) script generated correctly(newbie on) 1`] = `"[\\"所有壞人擘大眼，總共有3個壞人開眼\\",\\"所有壞人合埋眼\\",\\"壞人豎起手指公。梅林擘大眼，總共有3隻手指公\\",\\"梅林合埋眼，壞人收起手指公\\",\\"所有人擘大眼\\"]"`;
