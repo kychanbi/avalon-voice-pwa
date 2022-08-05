@@ -34,6 +34,7 @@
     "workbox-streams": "^6.3.0"
   },
   "scripts": {
+    "deploy-gh-page": "yarn run build && yarn run deploy",
     "predeploy": "npm run build",
     "deploy": " gh-pages -d build",
     "start": "react-scripts start",
