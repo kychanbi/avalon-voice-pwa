@@ -74,6 +74,7 @@
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^8.0.1",
-    "prettier": "^2.4.1"
+    "prettier": "^2.4.1",
+    "user-agent-data-types": "^0.3.0"
   }
 }

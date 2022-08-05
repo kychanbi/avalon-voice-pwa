@@ -9,7 +9,7 @@ import {
   GameMode, QuestCharacterSetting,
   SettingContext,
 } from '../state/playerSetting';
-import { endSpeaking, speak } from '../utils/utils';
+import { checkIfIos, endSpeaking, speak } from '../utils/utils';
 
 interface settingDisplayProps{
   gameSetting: AllSetting;
@@ -100,10 +100,10 @@ const generateQuestScript = ({
   const s9 = isLancelotPresent ? '兩個蘭斯洛特合埋眼' : '';
   const s99 = '所有人擘大眼';
 
-  return [s0, s2, s3, s4, s5, s6, s7, s8,s9,s99].filter((s) => !!s);
+  return [s0, s2, s3, s4, s5, s6, s7, s8, s9, s99].filter((s) => !!s);
 };
 
-type GenerateAvalonScriptParams = Omit<AvalonCharacterSetting,'totalNumberOfPlayer'> & {
+type GenerateAvalonScriptParams = Omit<AvalonCharacterSetting, 'totalNumberOfPlayer'> & {
   numberOfEvil: number,
   useLancelotAlternativeRules: boolean,
   isNewbieMode: boolean,
@@ -192,9 +192,8 @@ const useMCPageHook = () => {
   const {
     questCharacterSetting,
     avalonCharacterSetting,
-        isNewbieMode,
+    isNewbieMode,
   } = allSetting;
-
   const [scriptArr, setScriptText] = useState<string[]>([]);
   const [scriptDisplay, setScriptDisplay] = useState<(string | JSX.Element)[]>([]);
   const [areVoicesLoaded, setAreVoicesLoad] = useState(false);
@@ -216,15 +215,21 @@ const useMCPageHook = () => {
     setScriptDisplay(t);
   }, [allSetting]);
 
-  useEffect(() => {
+  const checkIfVoiceLoaded = useCallback(() => {
     const synth = window.speechSynthesis;
-    synth.getVoices();
-    synth.onvoiceschanged = () => {
-      const voices = synth.getVoices();
-      if (voices.length > 0){
-        setAreVoicesLoad(true);
-      }
-    };
+    const voices = synth.getVoices();
+    if (voices.length > 0){
+      setAreVoicesLoad(true);
+    }
+  }, [setAreVoicesLoad]);
+
+  useEffect(() => {
+    if (checkIfIos()){
+      checkIfVoiceLoaded();
+    } else{
+      window.speechSynthesis.onvoiceschanged = checkIfVoiceLoaded;
+      checkIfVoiceLoaded();
+    }
   }, []);
   const playScript = useCallback(() => {
     endSpeaking();
