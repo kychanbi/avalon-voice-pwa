@@ -1,4 +1,4 @@
-import {AvalonCharacterSetting, QuestCharacterSetting} from "../state/playerSetting";
+import {AvalonCharacterSetting, QuestCharacterSetting} from "../../state/playerSetting";
 
 type GenerateAvalonScriptParams = Omit<AvalonCharacterSetting, 'totalNumberOfPlayer'> & {
   numberOfEvil: number,

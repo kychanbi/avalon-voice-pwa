@@ -8,7 +8,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import BrightnessMediumIcon from '@material-ui/icons/BrightnessMedium';
 import { SettingTab } from './SettingTab';
 import { SettingContext } from '../state/playerSetting';
-import { MCPage } from './MC';
+import { MCPage } from './MC/MC';
 import { Constants } from '../Constant';
 
 const useStyles = makeStyles((theme) => ({
