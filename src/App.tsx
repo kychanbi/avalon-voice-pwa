@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
+import { I18nProvider } from '@lingui/react';
+import { i18n } from '@lingui/core';
 import { Main } from './views/Main';
 import { SettingContextProvider } from './state/playerSetting';
+import { defaultLocale, dynamicActivate } from './i18nHelper';
 
-function App(){
+function App() {
+  useEffect(() => {
+    dynamicActivate(defaultLocale);
+  }, []);
   return (
-    <SettingContextProvider>
-      <Main />
-    </SettingContextProvider>
+    <I18nProvider i18n={i18n}>
+      <SettingContextProvider>
+        <Main />
+      </SettingContextProvider>
+    </I18nProvider>
   );
 }
 

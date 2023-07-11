@@ -81,7 +81,7 @@
     semver "^6.3.0"
     source-map "^0.5.0"
 
-"@babel/core@^7.11.1", "@babel/core@^7.16.0", "@babel/core@^7.21.0", "@babel/core@^7.22.8", "@babel/core@^7.7.2", "@babel/core@^7.8.0":
+"@babel/core@^7.11.1", "@babel/core@^7.16.0", "@babel/core@^7.21.0", "@babel/core@^7.7.2", "@babel/core@^7.8.0":
   version "7.22.8"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.22.8.tgz#386470abe884302db9c82e8e5e87be9e46c86785"
   integrity sha512-75+KxFB4CZqYRXjx4NlR4J7yGvKumBuZTmV4NV6v09dVXXkuYVYLT68N6HCzLvfJ+fWCxQsntNzKwwIXL4bHnw==
@@ -2810,6 +2810,14 @@
   integrity sha512-UtgO5pm6LpJKqmZctr2R2hT+qicb8UijFDG3dctKGBuwkkwunFZUswOLJ+AxfhaO652Vov/yf5qsymJ6UFXPBA==
   dependencies:
     "@messageformat/parser" "^5.0.0"
+
+"@lingui/react@^4.3.0":
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@lingui/react/-/react-4.3.0.tgz#d08fe2b3a6b97c891adc26bee68c83451ba24198"
+  integrity sha512-EbkS5J2i26ENuAie70Fb+urOlajOTpa0xF3wZ78Zt4XKJSruZQ1Vg0U7vndpD5QeLsIpjGmJONkLjg8KzyVmBA==
+  dependencies:
+    "@babel/runtime" "^7.20.13"
+    "@lingui/core" "4.3.0"
 
 "@material-ui/core@^4.12.3":
   version "4.12.3"
