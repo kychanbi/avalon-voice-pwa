@@ -1,4 +1,4 @@
-import { generateAvalonScript } from './MC';
+import {generateAvalonScript} from './generateScript';
 
 describe('Script generation testing (2 evils game)', () => {
   it('(0 special evils) script generated correctly', () => {
