@@ -35,6 +35,7 @@
     "workbox-streams": "^6.3.0"
   },
   "scripts": {
+    "translate": "npx lingui extract",
     "deploy-gh-page": "yarn run build && yarn run deploy",
     "predeploy": "npm run build",
     "deploy": " gh-pages -d build",
