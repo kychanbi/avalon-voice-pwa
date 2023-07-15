@@ -36,6 +36,7 @@
   },
   "scripts": {
     "translate": "npx lingui extract",
+    "build-translate": "npx lingui compile",
     "deploy-gh-page": "yarn run build && yarn run deploy",
     "predeploy": "npm run build",
     "deploy": " gh-pages -d build",
@@ -71,7 +72,7 @@
     "commitlint-config-seek": "^1.0.0",
     "eslint": "^7.29.0",
     "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-only-warn": "^1.0.3",
