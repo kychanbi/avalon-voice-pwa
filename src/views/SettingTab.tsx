@@ -17,15 +17,18 @@ import {
   Tab,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
+import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 import {
   AllSetting,
   defaultAllSetting,
   GameMode,
+  Language,
   SettingContext,
 } from '../state/playerSetting';
 import { Constants } from '../Constant';
 import { TabPanel } from './components/TabPanel';
 import { Trans } from '@lingui/macro';
+import { dynamicActivate } from '../i18nHelper';
 
 const useStyle = makeStyles((theme) => ({
   settingTab: {
@@ -62,8 +65,25 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
     useContext(SettingContext);
   const { avalonCharacterSetting, questCharacterSetting } = allSetting;
   const [formState, setFormState] = useState<AllSetting>(
-    allSetting ?? defaultAllSetting
+    allSetting ?? defaultAllSetting,
   );
+
+  const handleSwitchLang = async (
+    event: React.ChangeEvent<{}>,
+    value: Language,
+  ) => {
+    console.log('handleSwitchLang', value);
+    setFormState({ ...formState, language: value });
+    editSetting('language', value);
+    if (value === 'zh') {
+      setFormState({ ...formState, speakingRate: 0.8 });
+      editSetting('speakingRate', 0.8);
+    } else {
+      setFormState({ ...formState, speakingRate: 0.65 });
+      editSetting('speakingRate', 0.65);
+    }
+    await dynamicActivate(value);
+  };
   const handleSwitchTab = (event: React.ChangeEvent<{}>, value: GameMode) => {
     setFormState({ ...formState, gameMode: value });
     editSetting('gameMode', value);
@@ -73,7 +93,7 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
       name?: string | undefined;
       value: unknown;
       checked?: boolean;
-    }>
+    }>,
   ) => {
     const name = event.target.name as K;
     const value = event.target.value as AllSetting[K];
@@ -102,6 +122,14 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
       <Fab className={classes.closeBtn} onClick={closeDialog}>
         <CloseIcon />
       </Fab>
+      <ToggleButtonGroup
+        value={formState.language}
+        exclusive
+        onChange={handleSwitchLang}
+      >
+        <ToggleButton value={'en'}>English</ToggleButton>
+        <ToggleButton value={'zh'}>中文</ToggleButton>
+      </ToggleButtonGroup>
       <Tabs
         value={formState.gameMode}
         onChange={handleSwitchTab}

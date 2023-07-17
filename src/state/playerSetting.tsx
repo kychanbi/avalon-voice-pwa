@@ -1,46 +1,49 @@
 import React, { useState } from 'react';
 import { Constants } from '../Constant';
 
-export interface AvalonCharacterSetting{
-  totalNumberOfPlayer: string,
-  isPercivalPresent: boolean,
-  isMordredPresent: boolean,
-  isMorganaPresent: boolean,
-  isOberonPresent: boolean,
-  isLancelotPresent: boolean,
-  useLancelotAlternativeRules: boolean,
+export interface AvalonCharacterSetting {
+  totalNumberOfPlayer: string;
+  isPercivalPresent: boolean;
+  isMordredPresent: boolean;
+  isMorganaPresent: boolean;
+  isOberonPresent: boolean;
+  isLancelotPresent: boolean;
+  useLancelotAlternativeRules: boolean;
 }
 
-export interface QuestCharacterSetting{
-  isClericPresent: boolean,
-  isArthurPresent: boolean,
-  isBlindHunterPresent: boolean,
-  isMutineerPresent: boolean,
-  isChangelingPresent: boolean,
-  isScionPresent: boolean,
-  isMorganLeFayPresent: boolean,
-  isLancelotPresent: boolean,
+export interface QuestCharacterSetting {
+  isClericPresent: boolean;
+  isArthurPresent: boolean;
+  isBlindHunterPresent: boolean;
+  isMutineerPresent: boolean;
+  isChangelingPresent: boolean;
+  isScionPresent: boolean;
+  isMorganLeFayPresent: boolean;
+  isLancelotPresent: boolean;
 }
 
-export enum GameMode{
+export enum GameMode {
   Avalon = 'avalon',
   Quest = 'quest',
 }
 
-export interface AllSetting extends VoiceSetting{
-  avalonCharacterSetting: AvalonCharacterSetting,
-  questCharacterSetting: QuestCharacterSetting,
-  isDarkMode: boolean,
-  isNewbieMode: boolean,
-  gameMode: GameMode
+export type Language = 'en' | 'zh';
+
+export interface AllSetting extends VoiceSetting {
+  avalonCharacterSetting: AvalonCharacterSetting;
+  questCharacterSetting: QuestCharacterSetting;
+  isDarkMode: boolean;
+  isNewbieMode: boolean;
+  gameMode: GameMode;
+  language: Language;
 }
 
-export interface VoiceSetting{
-  speakingRate: number,
-  countingRate: number,
+export interface VoiceSetting {
+  speakingRate: number;
+  countingRate: number;
 }
 
-export interface PresetSetting extends AvalonCharacterSetting{
+export interface PresetSetting extends AvalonCharacterSetting {
   desc: string;
 }
 
@@ -68,6 +71,7 @@ export const defaultAllSetting: AllSetting = {
   isDarkMode: false,
   isNewbieMode: false,
   gameMode: GameMode.Avalon,
+  language: 'zh',
   questCharacterSetting: {
     isBlindHunterPresent: true,
     isClericPresent: true,
@@ -80,40 +84,38 @@ export const defaultAllSetting: AllSetting = {
   },
 };
 
-interface GoodEvilNumber{
-  numberOfGood: number,
-  numberOfEvil: number
+interface GoodEvilNumber {
+  numberOfGood: number;
+  numberOfEvil: number;
 }
 
-export function calcGoodEvilNumber(total: string): GoodEvilNumber{
+export function calcGoodEvilNumber(total: string): GoodEvilNumber {
   return {
     numberOfGood: Constants.totalNumberOfPlayers[total].good,
     numberOfEvil: Constants.totalNumberOfPlayers[total].evil,
   } as GoodEvilNumber;
 }
 
-interface SettingContextType{
-  allSetting: AllSetting,
-  editSetting: Function,
-  editAllCharacterSettings: Function
+interface SettingContextType {
+  allSetting: AllSetting;
+  editSetting: Function;
+  editAllCharacterSettings: Function;
 }
 
 export const SettingContext = React.createContext<SettingContextType>({
   allSetting: defaultAllSetting,
-  editSetting: () => {
-  },
-  editAllCharacterSettings: () => {
-  },
+  editSetting: () => {},
+  editAllCharacterSettings: () => {},
 });
 
-interface SettingContextProviderProp{
+interface SettingContextProviderProp {
   children: React.ReactNode;
 }
 
-export const SettingContextProvider = ({ children }: SettingContextProviderProp) => {
-  const [allSetting, setAllSetting] = useState<AllSetting>(
-    defaultAllSetting,
-  );
+export const SettingContextProvider = ({
+  children,
+}: SettingContextProviderProp) => {
+  const [allSetting, setAllSetting] = useState<AllSetting>(defaultAllSetting);
   const editAllCharacterSettings = (value: AvalonCharacterSetting) => {
     let tempSetting = allSetting.avalonCharacterSetting;
     tempSetting = { ...tempSetting, ...value };
@@ -123,9 +125,12 @@ export const SettingContextProvider = ({ children }: SettingContextProviderProp)
     });
   };
   const editSetting = (name: string, value: any) => {
-    if (name.includes('.')){
+    if (name.includes('.')) {
       const [subSetting, settingType] = name.split('.');
-      let tempSetting = allSetting[subSetting as 'avalonCharacterSetting' | 'questCharacterSetting'];
+      let tempSetting =
+        allSetting[
+          subSetting as 'avalonCharacterSetting' | 'questCharacterSetting'
+        ];
       tempSetting = {
         ...tempSetting,
         [settingType]: value,
@@ -134,7 +139,7 @@ export const SettingContextProvider = ({ children }: SettingContextProviderProp)
         ...allSetting,
         [subSetting]: tempSetting,
       });
-    } else{
+    } else {
       const tempSetting = {
         ...allSetting,
         [name]: value,
@@ -143,11 +148,12 @@ export const SettingContextProvider = ({ children }: SettingContextProviderProp)
     }
   };
   return (
-    <SettingContext.Provider value={{
-      allSetting,
-      editSetting,
-      editAllCharacterSettings,
-    }}
+    <SettingContext.Provider
+      value={{
+        allSetting,
+        editSetting,
+        editAllCharacterSettings,
+      }}
     >
       {children}
     </SettingContext.Provider>

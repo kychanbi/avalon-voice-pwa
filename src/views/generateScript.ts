@@ -116,7 +116,7 @@ export const generateAvalonScript = ({
   const scriptEvil2 = t`所有壞人合埋眼`;
   const scriptEvil3 =
     (isMordredPresent ? t`除左【莫德雷德】以外，` : '') +
-    t`壞人豎起手指公。梅林擘大眼` +
+    t`壞人豎起手指公，梅林擘大眼` +
     (isNewbieMode
       ? t`，總共有` +
         (numberOfEvil - (isMordredPresent as unknown as number)) +
@@ -128,7 +128,7 @@ export const generateAvalonScript = ({
   const scriptGood2 = t`梅林合埋眼，壞人收起手指公`;
   const scriptGood3 = isPercivalPresent
     ? t`【梅林】` +
-      (isMorganaPresent ? `及【莫甘娜】` : '') +
+      (isMorganaPresent ? t`及【莫甘娜】` : '') +
       t`豎起手指公，【派西維爾】擘大眼。`
     : '';
   const scriptGood4 = isPercivalPresent
@@ -136,7 +136,7 @@ export const generateAvalonScript = ({
       (isMorganaPresent ? t`及【莫甘娜】` : '') +
       t`收起手指公，【派西維爾】合埋眼。`
     : '';
-  const scriptGood5 = `所有人擘大眼`;
+  const scriptGood5 = t`所有人擘大眼`;
   return [
     scriptAlternativeRule,
     scriptAlternativeRule2,
