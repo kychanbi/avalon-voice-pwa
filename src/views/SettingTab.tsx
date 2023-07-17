@@ -122,6 +122,8 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
       <Fab className={classes.closeBtn} onClick={closeDialog}>
         <CloseIcon />
       </Fab>
+      {/* TODO fix when switching back to zh
+       */}
       <ToggleButtonGroup
         value={formState.language}
         exclusive
