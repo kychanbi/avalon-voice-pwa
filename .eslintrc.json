@@ -4,9 +4,9 @@
         "es2021": true
     },
     "extends": [
-        "prettier",
         "airbnb",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "plugin:prettier/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
