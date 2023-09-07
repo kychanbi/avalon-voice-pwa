@@ -1,4 +1,6 @@
-import {generateAvalonScript} from './generateScript';
+import { generateAvalonScript } from './generateScript';
+
+// todo update for english version
 
 describe('Script generation testing (2 evils game)', () => {
   it('(0 special evils) script generated correctly', () => {
@@ -10,18 +12,19 @@ describe('Script generation testing (2 evils game)', () => {
     const isPercivalPresent = false;
     const isNewbieMode = false;
     const numberOfEvil = 2;
-    const scripts = JSON.stringify(generateAvalonScript({
-      useLancelotAlternativeRules,
-      isLancelotPresent,
-      isMordredPresent,
-      isMorganaPresent,
-      isOberonPresent,
-      isPercivalPresent,
-      isNewbieMode,
-      numberOfEvil,
-    }));
-    expect(scripts)
-      .toMatchSnapshot();
+    const scripts = JSON.stringify(
+      generateAvalonScript({
+        useLancelotAlternativeRules,
+        isLancelotPresent,
+        isMordredPresent,
+        isMorganaPresent,
+        isOberonPresent,
+        isPercivalPresent,
+        isNewbieMode,
+        numberOfEvil,
+      }),
+    );
+    expect(scripts).toMatchSnapshot();
   });
 
   it('(Mordred present) script generated correctly', () => {
@@ -33,18 +36,19 @@ describe('Script generation testing (2 evils game)', () => {
     const isPercivalPresent = false;
     const isNewbieMode = false;
     const numberOfEvil = 2;
-    const scripts = JSON.stringify(generateAvalonScript({
-      useLancelotAlternativeRules,
-      isLancelotPresent,
-      isMordredPresent,
-      isMorganaPresent,
-      isOberonPresent,
-      isPercivalPresent,
-      isNewbieMode,
-      numberOfEvil,
-    }));
-    expect(scripts)
-      .toMatchSnapshot();
+    const scripts = JSON.stringify(
+      generateAvalonScript({
+        useLancelotAlternativeRules,
+        isLancelotPresent,
+        isMordredPresent,
+        isMorganaPresent,
+        isOberonPresent,
+        isPercivalPresent,
+        isNewbieMode,
+        numberOfEvil,
+      }),
+    );
+    expect(scripts).toMatchSnapshot();
   });
 
   it('(Mordred & Oberon present) script generated correctly', () => {
@@ -56,18 +60,19 @@ describe('Script generation testing (2 evils game)', () => {
     const isPercivalPresent = false;
     const isNewbieMode = false;
     const numberOfEvil = 2;
-    const scripts = JSON.stringify(generateAvalonScript({
-      useLancelotAlternativeRules,
-      isLancelotPresent,
-      isMordredPresent,
-      isMorganaPresent,
-      isOberonPresent,
-      isPercivalPresent,
-      isNewbieMode,
-      numberOfEvil,
-    }));
-    expect(scripts)
-      .toMatchSnapshot();
+    const scripts = JSON.stringify(
+      generateAvalonScript({
+        useLancelotAlternativeRules,
+        isLancelotPresent,
+        isMordredPresent,
+        isMorganaPresent,
+        isOberonPresent,
+        isPercivalPresent,
+        isNewbieMode,
+        numberOfEvil,
+      }),
+    );
+    expect(scripts).toMatchSnapshot();
   });
 
   it('(Mordred & Oberon present) newbie on script generated correctly', () => {
@@ -79,18 +84,19 @@ describe('Script generation testing (2 evils game)', () => {
     const isPercivalPresent = false;
     const isNewbieMode = false;
     const numberOfEvil = 2;
-    const scripts = JSON.stringify(generateAvalonScript({
-      useLancelotAlternativeRules,
-      isLancelotPresent,
-      isMordredPresent,
-      isMorganaPresent,
-      isOberonPresent,
-      isPercivalPresent,
-      isNewbieMode,
-      numberOfEvil,
-    }));
-    expect(scripts)
-      .toMatchSnapshot();
+    const scripts = JSON.stringify(
+      generateAvalonScript({
+        useLancelotAlternativeRules,
+        isLancelotPresent,
+        isMordredPresent,
+        isMorganaPresent,
+        isOberonPresent,
+        isPercivalPresent,
+        isNewbieMode,
+        numberOfEvil,
+      }),
+    );
+    expect(scripts).toMatchSnapshot();
   });
 });
 
@@ -104,18 +110,19 @@ describe('Script generation testing (3 evils game)', () => {
     const isPercivalPresent = false;
     const isNewbieMode = true;
     const numberOfEvil = 3;
-    const scripts = JSON.stringify(generateAvalonScript({
-      useLancelotAlternativeRules,
-      isLancelotPresent,
-      isMordredPresent,
-      isMorganaPresent,
-      isOberonPresent,
-      isPercivalPresent,
-      isNewbieMode,
-      numberOfEvil,
-    }));
-    expect(scripts)
-      .toMatchSnapshot();
+    const scripts = JSON.stringify(
+      generateAvalonScript({
+        useLancelotAlternativeRules,
+        isLancelotPresent,
+        isMordredPresent,
+        isMorganaPresent,
+        isOberonPresent,
+        isPercivalPresent,
+        isNewbieMode,
+        numberOfEvil,
+      }),
+    );
+    expect(scripts).toMatchSnapshot();
   });
   it('(Mordred present) script generated correctly(newbie on)', () => {
     const useLancelotAlternativeRules = false;
@@ -126,18 +133,19 @@ describe('Script generation testing (3 evils game)', () => {
     const isPercivalPresent = false;
     const isNewbieMode = true;
     const numberOfEvil = 3;
-    const scripts = JSON.stringify(generateAvalonScript({
-      useLancelotAlternativeRules,
-      isLancelotPresent,
-      isMordredPresent,
-      isMorganaPresent,
-      isOberonPresent,
-      isPercivalPresent,
-      isNewbieMode,
-      numberOfEvil,
-    }));
-    expect(scripts)
-      .toMatchSnapshot();
+    const scripts = JSON.stringify(
+      generateAvalonScript({
+        useLancelotAlternativeRules,
+        isLancelotPresent,
+        isMordredPresent,
+        isMorganaPresent,
+        isOberonPresent,
+        isPercivalPresent,
+        isNewbieMode,
+        numberOfEvil,
+      }),
+    );
+    expect(scripts).toMatchSnapshot();
   });
   it('(Mordred Morgana present) script generated correctly', () => {
     const useLancelotAlternativeRules = false;
@@ -148,18 +156,19 @@ describe('Script generation testing (3 evils game)', () => {
     const isPercivalPresent = true;
     const isNewbieMode = false;
     const numberOfEvil = 3;
-    const scripts = JSON.stringify(generateAvalonScript({
-      useLancelotAlternativeRules,
-      isLancelotPresent,
-      isMordredPresent,
-      isMorganaPresent,
-      isOberonPresent,
-      isPercivalPresent,
-      isNewbieMode,
-      numberOfEvil,
-    }));
-    expect(scripts)
-      .toMatchSnapshot();
+    const scripts = JSON.stringify(
+      generateAvalonScript({
+        useLancelotAlternativeRules,
+        isLancelotPresent,
+        isMordredPresent,
+        isMorganaPresent,
+        isOberonPresent,
+        isPercivalPresent,
+        isNewbieMode,
+        numberOfEvil,
+      }),
+    );
+    expect(scripts).toMatchSnapshot();
   });
   it('(Mordred Morgana Oberon present) script generated correctly', () => {
     const useLancelotAlternativeRules = false;
@@ -170,18 +179,19 @@ describe('Script generation testing (3 evils game)', () => {
     const isPercivalPresent = true;
     const isNewbieMode = false;
     const numberOfEvil = 3;
-    const scripts = JSON.stringify(generateAvalonScript({
-      useLancelotAlternativeRules,
-      isLancelotPresent,
-      isMordredPresent,
-      isMorganaPresent,
-      isOberonPresent,
-      isPercivalPresent,
-      isNewbieMode,
-      numberOfEvil,
-    }));
-    expect(scripts)
-      .toMatchSnapshot();
+    const scripts = JSON.stringify(
+      generateAvalonScript({
+        useLancelotAlternativeRules,
+        isLancelotPresent,
+        isMordredPresent,
+        isMorganaPresent,
+        isOberonPresent,
+        isPercivalPresent,
+        isNewbieMode,
+        numberOfEvil,
+      }),
+    );
+    expect(scripts).toMatchSnapshot();
   });
   it('(Mordred Morgana Lancelot present) script generated correctly', () => {
     const useLancelotAlternativeRules = false;
@@ -192,17 +202,18 @@ describe('Script generation testing (3 evils game)', () => {
     const isPercivalPresent = true;
     const isNewbieMode = false;
     const numberOfEvil = 3;
-    const scripts = JSON.stringify(generateAvalonScript({
-      useLancelotAlternativeRules,
-      isLancelotPresent,
-      isMordredPresent,
-      isMorganaPresent,
-      isOberonPresent,
-      isPercivalPresent,
-      isNewbieMode,
-      numberOfEvil,
-    }));
-    expect(scripts)
-      .toMatchSnapshot();
+    const scripts = JSON.stringify(
+      generateAvalonScript({
+        useLancelotAlternativeRules,
+        isLancelotPresent,
+        isMordredPresent,
+        isMorganaPresent,
+        isOberonPresent,
+        isPercivalPresent,
+        isNewbieMode,
+        numberOfEvil,
+      }),
+    );
+    expect(scripts).toMatchSnapshot();
   });
 });
