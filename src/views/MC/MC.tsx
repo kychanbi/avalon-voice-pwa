@@ -14,9 +14,9 @@ import {
 import { checkIfIos, endSpeaking, speak } from '../../utils/utils';
 import { generateAvalonScript, generateQuestScript } from './generateScript';
 import { t } from '@lingui/macro';
-import PlayButton from './components/PlayButton';
-import StopButton from './components/StopButton';
-import CurrentSettingDisplay from './components/CurrentSettingDisplay';
+import PlayButton from '../components/PlayButton';
+import StopButton from '../components/StopButton';
+import CurrentSettingDisplay from '../components/CurrentSettingDisplay';
 
 const useStyles = makeStyles((theme) => ({
   mcCard: {

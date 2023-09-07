@@ -1,7 +1,7 @@
 import {
   AvalonCharacterSetting,
   QuestCharacterSetting,
-} from '../state/playerSetting';
+} from '../../state/playerSetting';
 import { t } from '@lingui/macro';
 
 type GenerateAvalonScriptParams = Omit<
