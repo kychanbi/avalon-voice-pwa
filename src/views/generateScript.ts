@@ -86,6 +86,7 @@ export const generateAvalonScript = ({
   isNewbieMode,
   numberOfEvil,
 }: GenerateAvalonScriptParams): string[] => {
+  console.log('generateAvalonScript ');
   let numEvilOpenEyes = numberOfEvil;
   // isMordredPresent && numOtherEvil--;
   isOberonPresent && numEvilOpenEyes--;

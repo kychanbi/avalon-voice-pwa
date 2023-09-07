@@ -1,17 +1,19 @@
 import { Constants } from '../Constant';
 
-export function findVoiceByLang(langs: string[]): (SpeechSynthesisVoice | undefined){
+export function findVoiceByLang(
+  langs: string[],
+): SpeechSynthesisVoice | undefined {
   const synth = window.speechSynthesis;
   const voices: SpeechSynthesisVoice[] = synth.getVoices();
   const foundVoiceArr = voices.filter((v) => langs.includes(v.lang));
   const [found] = foundVoiceArr;
-  console.debug(voices);
-  console.debug(langs);
+  console.debug('voices', voices);
+  console.debug('langs', langs);
   console.debug(found);
   return found;
   // synth.voice
 }
-export async function sleep(ms: number){
+export async function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
@@ -19,38 +21,44 @@ export async function sleep(ms: number){
 // setVoice(Constants.voice);
 // }
 
-
-export function speak(text: string, rate = 1){
+export function speak(
+  text: string,
+  rate = 1,
+  lang: string = Constants.langs[0],
+) {
   const synth = window.speechSynthesis;
   const utterance = new SpeechSynthesisUtterance(text);
-  utterance.voice = findVoiceByLang(Constants.langs) as SpeechSynthesisVoice;
+  utterance.voice = findVoiceByLang([
+    lang,
+    ...Constants.langs,
+  ]) as SpeechSynthesisVoice;
   utterance.lang = utterance.voice?.lang;
   utterance.rate = rate;
   // synth.cancel();
   synth.speak(utterance);
-  console.log(text);
+  console.log('text:', text);
   // console.log(scriptArr);
   console.log(utterance);
   // synth.resume();
   // synth.cancel();
 }
 
-export async function pauseSpeaking(s: number){
+export async function pauseSpeaking(s: number) {
   const synth = window.speechSynthesis;
   synth.pause();
   await sleep(s * 1000);
   synth.resume();
 }
 
-export function endSpeaking(){
+export function endSpeaking() {
   const synth = window.speechSynthesis;
   synth.cancel();
 }
 
-export function getDevicePlatform():string{
+export function getDevicePlatform(): string {
   return navigator?.userAgentData?.platform || navigator?.platform || 'unknown';
 }
 
-export function checkIfIos():boolean{
+export function checkIfIos(): boolean {
   return /iPad|iPhone|iPod/.test(getDevicePlatform());
 }

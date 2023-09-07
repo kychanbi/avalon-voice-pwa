@@ -27,7 +27,7 @@ export enum GameMode {
   Quest = 'quest',
 }
 
-export type Language = 'en' | 'zh';
+export type Language = 'en-GB' | 'zh-hk';
 
 export interface AllSetting extends VoiceSetting {
   avalonCharacterSetting: AvalonCharacterSetting;
@@ -71,7 +71,7 @@ export const defaultAllSetting: AllSetting = {
   isDarkMode: false,
   isNewbieMode: false,
   gameMode: GameMode.Avalon,
-  language: 'zh',
+  language: 'zh-hk',
   questCharacterSetting: {
     isBlindHunterPresent: true,
     isClericPresent: true,
@@ -125,6 +125,7 @@ export const SettingContextProvider = ({
     });
   };
   const editSetting = (name: string, value: any) => {
+    console.log('editSetting', name, value);
     if (name.includes('.')) {
       const [subSetting, settingType] = name.split('.');
       let tempSetting =
@@ -144,6 +145,7 @@ export const SettingContextProvider = ({
         ...allSetting,
         [name]: value,
       };
+      console.log('tempSetting', tempSetting);
       setAllSetting(tempSetting);
     }
   };

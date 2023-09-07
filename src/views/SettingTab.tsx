@@ -72,17 +72,18 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
     event: React.ChangeEvent<{}>,
     value: Language,
   ) => {
+    await dynamicActivate(value);
+
     console.log('handleSwitchLang', value);
     setFormState({ ...formState, language: value });
     editSetting('language', value);
-    if (value === 'zh') {
-      setFormState({ ...formState, speakingRate: 0.8 });
-      editSetting('speakingRate', 0.8);
-    } else {
-      setFormState({ ...formState, speakingRate: 0.65 });
-      editSetting('speakingRate', 0.65);
-    }
-    await dynamicActivate(value);
+    // if (value === 'zh-hk') {
+    //   setFormState({ ...formState, speakingRate: 0.8 });
+    //   editSetting('speakingRate', 0.8);
+    // } else {
+    //   setFormState({ ...formState, speakingRate: 0.65 });
+    //   editSetting('speakingRate', 0.65);
+    // }
   };
   const handleSwitchTab = (event: React.ChangeEvent<{}>, value: GameMode) => {
     setFormState({ ...formState, gameMode: value });
@@ -122,15 +123,13 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
       <Fab className={classes.closeBtn} onClick={closeDialog}>
         <CloseIcon />
       </Fab>
-      {/* TODO fix when switching back to zh
-       */}
       <ToggleButtonGroup
         value={formState.language}
         exclusive
         onChange={handleSwitchLang}
       >
-        <ToggleButton value={'en'}>English</ToggleButton>
-        <ToggleButton value={'zh'}>中文</ToggleButton>
+        <ToggleButton value={'en-GB'}>English</ToggleButton>
+        <ToggleButton value={'zh-hk'}>中文</ToggleButton>
       </ToggleButtonGroup>
       <Tabs
         value={formState.gameMode}
