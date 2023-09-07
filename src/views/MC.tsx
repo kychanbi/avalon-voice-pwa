@@ -62,7 +62,6 @@ const useMCPageHook = () => {
             ...questCharacterSetting,
           });
     const t = addLineBreaksToScript(s);
-    console.log('useMCpagehook', s);
     setScriptText(s);
     setScriptDisplay(t);
   }, [allSetting]);
@@ -86,7 +85,6 @@ const useMCPageHook = () => {
     }
   }, []);
   const playScript = useCallback(() => {
-    console.log('allSetting.language', allSetting.language);
     endSpeaking();
     scriptArr.forEach((s) => {
       speak(t`三，二，一．`, allSetting.countingRate, allSetting.language);

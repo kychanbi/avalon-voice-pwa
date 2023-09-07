@@ -86,15 +86,10 @@ export const generateAvalonScript = ({
   isNewbieMode,
   numberOfEvil,
 }: GenerateAvalonScriptParams): string[] => {
-  console.log('generateAvalonScript ');
   let numEvilOpenEyes = numberOfEvil;
-  // isMordredPresent && numOtherEvil--;
   isOberonPresent && numEvilOpenEyes--;
-  // isMorganaPresent && numOtherEvil--;
   isLancelotPresent && numEvilOpenEyes--;
 
-  // const script1 = '';
-  // let scriptEvil = '所有人合埋眼，伸手握拳放係枱上，所有壞人開眼';
   const scriptAlternativeRule = useLancelotAlternativeRules
     ? t`兩個蘭斯洛特開眼確認身份`
     : '';
@@ -123,9 +118,7 @@ export const generateAvalonScript = ({
         (numberOfEvil - (isMordredPresent as unknown as number)) +
         t`隻手指公`
       : '');
-  // const numOfEvilShown = numberOfEvil - (+isMordredPresent);
-  // const scriptGood = '';
-  // ，`總共有 ${numOfEvilShown} 個壞人，如果數目有錯，請出聲。`;
+
   const scriptGood2 = t`梅林合埋眼，壞人收起手指公`;
   const scriptGood3 = isPercivalPresent
     ? t`【梅林】` +

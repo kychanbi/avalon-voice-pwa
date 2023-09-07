@@ -72,21 +72,27 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
     event: React.ChangeEvent<{}>,
     value: Language,
   ) => {
+    if (!value) return;
     await dynamicActivate(value);
 
-    console.log('handleSwitchLang', value);
-    setFormState({ ...formState, language: value });
+    setFormState((prevFormState) => ({ ...prevFormState, language: value }));
     editSetting('language', value);
-    // if (value === 'zh-hk') {
-    //   setFormState({ ...formState, speakingRate: 0.8 });
-    //   editSetting('speakingRate', 0.8);
-    // } else {
-    //   setFormState({ ...formState, speakingRate: 0.65 });
-    //   editSetting('speakingRate', 0.65);
-    // }
+    if (value === 'zh-hk') {
+      setFormState((prevFormState) => ({
+        ...prevFormState,
+        speakingRate: 0.8,
+      }));
+      editSetting('speakingRate', 0.8);
+    } else {
+      setFormState((prevFormState) => ({
+        ...prevFormState,
+        speakingRate: 0.65,
+      }));
+      editSetting('speakingRate', 0.65);
+    }
   };
   const handleSwitchTab = (event: React.ChangeEvent<{}>, value: GameMode) => {
-    setFormState({ ...formState, gameMode: value });
+    setFormState((prevFormState) => ({ ...prevFormState, gameMode: value }));
     editSetting('gameMode', value);
   };
   const handleChange = <K extends keyof AllSetting>(
@@ -101,20 +107,20 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
     const checked = event.target.checked as boolean;
     const newVal = checked === undefined ? value : checked;
 
-    setFormState({ ...formState, [name]: newVal });
+    setFormState((prevFormState) => ({ ...prevFormState, [name]: newVal }));
     editSetting(name, newVal);
   };
   const handleSliderChange =
     (name: string) =>
     (event: React.ChangeEvent<{}>, value: number | number[]) => {
       if (Array.isArray(value)) return;
-      setFormState({ ...formState, [name]: value });
+      setFormState((prevFormState) => ({ ...prevFormState, [name]: value }));
       editSetting(name, value);
     };
 
   const handlePresetClick = (id: string) => {
     const setting = Constants.presets[id];
-    setFormState({ ...formState, ...setting });
+    setFormState((prevFormState) => ({ ...prevFormState, ...setting }));
     editAllCharacterSettings(setting);
   };
 

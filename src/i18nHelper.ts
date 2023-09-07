@@ -7,9 +7,7 @@ export const locales = {
 };
 
 export async function dynamicActivate(locale: Language) {
-  console.log('dynamicActivate locale', locale);
   const { messages } = await import(`./locales/${locale}/messages`);
-  console.log('dynamicActivate messages', messages);
   i18n.load(locale, messages);
   i18n.activate(locale);
 }

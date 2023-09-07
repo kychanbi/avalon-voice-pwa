@@ -125,7 +125,6 @@ export const SettingContextProvider = ({
     });
   };
   const editSetting = (name: string, value: any) => {
-    console.log('editSetting', name, value);
     if (name.includes('.')) {
       const [subSetting, settingType] = name.split('.');
       let tempSetting =
@@ -145,7 +144,6 @@ export const SettingContextProvider = ({
         ...allSetting,
         [name]: value,
       };
-      console.log('tempSetting', tempSetting);
       setAllSetting(tempSetting);
     }
   };
