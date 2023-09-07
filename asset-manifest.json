@@ -1,16 +1,15 @@
 {
   "files": {
-    "main.css": "/avalon-voice-pwa/static/css/main.073c9b0a.css",
-    "main.js": "/avalon-voice-pwa/static/js/main.90d4f79d.js",
-    "static/js/787.2830b5d1.chunk.js": "/avalon-voice-pwa/static/js/787.2830b5d1.chunk.js",
+    "main.css": "/avalon-voice-pwa/static/css/main.ba17183d.css",
+    "main.js": "/avalon-voice-pwa/static/js/main.d2d8f9db.js",
+    "static/js/318.2d5696bc.chunk.js": "/avalon-voice-pwa/static/js/318.2d5696bc.chunk.js",
+    "static/js/543.9e4497ff.chunk.js": "/avalon-voice-pwa/static/js/543.9e4497ff.chunk.js",
+    "static/js/27.f8b324e5.chunk.js": "/avalon-voice-pwa/static/js/27.f8b324e5.chunk.js",
     "service-worker.js": "/avalon-voice-pwa/service-worker.js",
-    "index.html": "/avalon-voice-pwa/index.html",
-    "main.073c9b0a.css.map": "/avalon-voice-pwa/static/css/main.073c9b0a.css.map",
-    "main.90d4f79d.js.map": "/avalon-voice-pwa/static/js/main.90d4f79d.js.map",
-    "787.2830b5d1.chunk.js.map": "/avalon-voice-pwa/static/js/787.2830b5d1.chunk.js.map"
+    "index.html": "/avalon-voice-pwa/index.html"
   },
   "entrypoints": [
-    "static/css/main.073c9b0a.css",
-    "static/js/main.90d4f79d.js"
+    "static/css/main.ba17183d.css",
+    "static/js/main.d2d8f9db.js"
   ]
 }
