@@ -10,8 +10,8 @@ import {
   calcGoodEvilNumber,
   GameMode,
   SettingContext,
-} from '../state/playerSetting';
-import { checkIfIos, endSpeaking, speak } from '../utils/utils';
+} from '../../state/playerSetting';
+import { checkIfIos, endSpeaking, speak } from '../../utils/utils';
 import { generateAvalonScript, generateQuestScript } from './generateScript';
 import { t } from '@lingui/macro';
 import PlayButton from './components/PlayButton';
