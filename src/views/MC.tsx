@@ -1,33 +1,22 @@
-import React, {
-  EventHandler,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {
-  Box,
   Card,
   CircularProgress,
-  Fab,
   makeStyles,
   Typography,
 } from '@material-ui/core';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import StopIcon from '@material-ui/icons/Stop';
+
 import {
-  AllSetting,
   calcGoodEvilNumber,
-  defaultAllSetting,
   GameMode,
   SettingContext,
 } from '../state/playerSetting';
 import { checkIfIos, endSpeaking, speak } from '../utils/utils';
 import { generateAvalonScript, generateQuestScript } from './generateScript';
-
-interface settingDisplayProps {
-  gameSetting: AllSetting;
-}
+import { t } from '@lingui/macro';
+import PlayButton from './components/PlayButton';
+import StopButton from './components/StopButton';
+import CurrentSettingDisplay from './components/CurrentSettingDisplay';
 
 const useStyles = makeStyles((theme) => ({
   mcCard: {
@@ -41,21 +30,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CurrentSettingDisplay = ({ gameSetting }: settingDisplayProps) => {
-  const { totalNumberOfPlayer } = gameSetting.avalonCharacterSetting;
-  const { numberOfGood, numberOfEvil } = calcGoodEvilNumber(
-    totalNumberOfPlayer ??
-      defaultAllSetting.avalonCharacterSetting.totalNumberOfPlayer,
-  );
-  return (
-    <Box>
-      <Typography variant="subtitle1">總人數: {totalNumberOfPlayer}</Typography>
-      <Typography variant="subtitle1">好人: {numberOfGood} 個</Typography>
-      <Typography variant="subtitle1">壞人: {numberOfEvil} 個</Typography>
-    </Box>
-  );
-};
-
 const addLineBreaksToScript = (script: string[]): (string | JSX.Element)[] =>
   script
     .map(
@@ -64,41 +38,7 @@ const addLineBreaksToScript = (script: string[]): (string | JSX.Element)[] =>
     )
     .reduce((ac, curr) => ac.concat(curr), []);
 
-const PlayButton = (props: { playOnClick: EventHandler<any> }) => {
-  const { playOnClick } = props;
-  return (
-    <div
-      onClick={playOnClick}
-      role="button"
-      tabIndex={0}
-      onKeyDown={playOnClick}
-    >
-      <Fab variant="extended" color="primary">
-        <PlayArrowIcon /> Click to Play Script
-      </Fab>
-    </div>
-  );
-};
-
-const StopButton = (props: { stopPlaying: EventHandler<any> }) => {
-  const { stopPlaying } = props;
-  return (
-    <div
-      onClick={stopPlaying}
-      role="button"
-      tabIndex={0}
-      onKeyDown={stopPlaying}
-    >
-      <Fab variant="extended" color="secondary">
-        <StopIcon />
-      </Fab>
-    </div>
-  );
-};
-
 const useMCPageHook = () => {
-  // const synthesize = useSynthesize();
-
   const { allSetting } = useContext(SettingContext);
   const { questCharacterSetting, avalonCharacterSetting, isNewbieMode } =
     allSetting;
@@ -149,7 +89,7 @@ const useMCPageHook = () => {
     console.log('allSetting.language', allSetting.language);
     endSpeaking();
     scriptArr.forEach((s) => {
-      speak('三，二，一．', allSetting.countingRate, allSetting.language);
+      speak(t`三，二，一．`, allSetting.countingRate, allSetting.language);
       speak(s, allSetting.speakingRate, allSetting.language);
     });
   }, [scriptArr, allSetting.language]);

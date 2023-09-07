@@ -13,13 +13,13 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/views/generateScript.ts:108
-#: src/views/generateScript.ts:113
+#: src/views/generateScript.ts:109
+#: src/views/generateScript.ts:114
 msgid "，壞蘭斯洛特豎起手指公"
 msgstr "，壞蘭斯洛特豎起手指公"
 
-#: src/views/generateScript.ts:114
-#: src/views/generateScript.ts:121
+#: src/views/generateScript.ts:115
+#: src/views/generateScript.ts:122
 msgid "，總共有"
 msgstr "，總共有"
 
@@ -27,76 +27,92 @@ msgstr "，總共有"
 #~ msgid "，總共有{numEvilOpenEyes}個壞人開眼"
 #~ msgstr "，總共有{numEvilOpenEyes}個壞人開眼"
 
-#: src/views/generateScript.ts:130
-#: src/views/generateScript.ts:135
+#: src/views/generateScript.ts:131
+#: src/views/generateScript.ts:136
 msgid "【梅林】"
 msgstr "【梅林】"
 
-#: src/views/generateScript.ts:114
+#: src/views/MC.tsx:92
+msgid "三，二，一．"
+msgstr "三，二，一．"
+
+#: src/views/generateScript.ts:115
 msgid "個壞人開眼"
 msgstr "個壞人開眼"
 
-#: src/views/generateScript.ts:101
+#: src/views/generateScript.ts:102
 msgid "兩個蘭斯洛特合埋眼"
 msgstr "兩個蘭斯洛特合埋眼"
 
-#: src/views/generateScript.ts:98
+#: src/views/generateScript.ts:99
 msgid "兩個蘭斯洛特開眼確認身份"
 msgstr "兩個蘭斯洛特開眼確認身份"
 
-#: src/views/generateScript.ts:131
-#: src/views/generateScript.ts:136
+#: src/views/generateScript.ts:132
+#: src/views/generateScript.ts:137
 msgid "及【莫甘娜】"
 msgstr "及【莫甘娜】"
 
-#: src/views/generateScript.ts:119
+#: src/views/components/CurrentSettingDisplay.tsx:23
+msgid "壞人: {numberOfEvil} 個"
+msgstr "壞人: {numberOfEvil} 個"
+
+#: src/views/generateScript.ts:120
 msgid "壞人豎起手指公，梅林擘大眼"
 msgstr "壞人豎起手指公，梅林擘大眼"
 
-#: src/views/generateScript.ts:139
+#: src/views/components/CurrentSettingDisplay.tsx:22
+msgid "好人: {numberOfGood} 個"
+msgstr "好人: {numberOfGood} 個"
+
+#: src/views/generateScript.ts:140
 msgid "所有人擘大眼"
 msgstr "所有人擘大眼"
 
-#: src/views/generateScript.ts:116
+#: src/views/generateScript.ts:117
 msgid "所有壞人合埋眼"
 msgstr "所有壞人合埋眼"
 
-#: src/views/generateScript.ts:103
+#: src/views/generateScript.ts:104
 msgid "所有壞人擘大眼"
 msgstr "所有壞人擘大眼"
 
-#: src/views/generateScript.ts:137
+#: src/views/generateScript.ts:138
 msgid "收起手指公，【派西維爾】合埋眼。"
 msgstr "收起手指公，【派西維爾】合埋眼。"
 
-#: src/views/generateScript.ts:128
+#: src/views/generateScript.ts:129
 msgid "梅林合埋眼，壞人收起手指公"
 msgstr "梅林合埋眼，壞人收起手指公"
 
-#: src/views/SettingTab.tsx:154
+#: src/views/SettingTab.tsx:153
 msgid "總人數"
 msgstr "總人數"
 
-#: src/views/generateScript.ts:132
+#: src/views/components/CurrentSettingDisplay.tsx:21
+msgid "總人數: {totalNumberOfPlayer}"
+msgstr "總人數: {totalNumberOfPlayer}"
+
+#: src/views/generateScript.ts:133
 msgid "豎起手指公，【派西維爾】擘大眼。"
 msgstr "豎起手指公，【派西維爾】擘大眼。"
 
-#: src/views/generateScript.ts:106
+#: src/views/generateScript.ts:107
 msgid "除【奧柏倫同壞蘭斯洛特】以外，"
 msgstr "除【奧柏倫同壞蘭斯洛特】以外，"
 
-#: src/views/generateScript.ts:113
+#: src/views/generateScript.ts:114
 msgid "除左【壞蘭斯洛特】以外，"
 msgstr "除左【壞蘭斯洛特】以外，"
 
-#: src/views/generateScript.ts:110
+#: src/views/generateScript.ts:111
 msgid "除左【奧柏倫】以外，"
 msgstr "除左【奧柏倫】以外，"
 
-#: src/views/generateScript.ts:118
+#: src/views/generateScript.ts:119
 msgid "除左【莫德雷德】以外，"
 msgstr "除左【莫德雷德】以外，"
 
-#: src/views/generateScript.ts:123
+#: src/views/generateScript.ts:124
 msgid "隻手指公"
 msgstr "隻手指公"
