@@ -1,24 +1,16 @@
 {
   "files": {
-    "main.css": "/avalon-voice-pwa/static/css/main.8c8b27cf.chunk.css",
-    "main.js": "/avalon-voice-pwa/static/js/main.5ef7dad1.chunk.js",
-    "main.js.map": "/avalon-voice-pwa/static/js/main.5ef7dad1.chunk.js.map",
-    "runtime-main.js": "/avalon-voice-pwa/static/js/runtime-main.5967873a.js",
-    "runtime-main.js.map": "/avalon-voice-pwa/static/js/runtime-main.5967873a.js.map",
-    "static/js/2.612207bd.chunk.js": "/avalon-voice-pwa/static/js/2.612207bd.chunk.js",
-    "static/js/2.612207bd.chunk.js.map": "/avalon-voice-pwa/static/js/2.612207bd.chunk.js.map",
-    "static/js/3.5522c336.chunk.js": "/avalon-voice-pwa/static/js/3.5522c336.chunk.js",
-    "static/js/3.5522c336.chunk.js.map": "/avalon-voice-pwa/static/js/3.5522c336.chunk.js.map",
-    "index.html": "/avalon-voice-pwa/index.html",
+    "main.css": "/avalon-voice-pwa/static/css/main.073c9b0a.css",
+    "main.js": "/avalon-voice-pwa/static/js/main.90d4f79d.js",
+    "static/js/787.2830b5d1.chunk.js": "/avalon-voice-pwa/static/js/787.2830b5d1.chunk.js",
     "service-worker.js": "/avalon-voice-pwa/service-worker.js",
-    "service-worker.js.map": "/avalon-voice-pwa/service-worker.js.map",
-    "static/css/main.8c8b27cf.chunk.css.map": "/avalon-voice-pwa/static/css/main.8c8b27cf.chunk.css.map",
-    "static/js/2.612207bd.chunk.js.LICENSE.txt": "/avalon-voice-pwa/static/js/2.612207bd.chunk.js.LICENSE.txt"
+    "index.html": "/avalon-voice-pwa/index.html",
+    "main.073c9b0a.css.map": "/avalon-voice-pwa/static/css/main.073c9b0a.css.map",
+    "main.90d4f79d.js.map": "/avalon-voice-pwa/static/js/main.90d4f79d.js.map",
+    "787.2830b5d1.chunk.js.map": "/avalon-voice-pwa/static/js/787.2830b5d1.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.5967873a.js",
-    "static/js/2.612207bd.chunk.js",
-    "static/css/main.8c8b27cf.chunk.css",
-    "static/js/main.5ef7dad1.chunk.js"
+    "static/css/main.073c9b0a.css",
+    "static/js/main.90d4f79d.js"
   ]
 }
