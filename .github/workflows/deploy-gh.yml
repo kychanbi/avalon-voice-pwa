@@ -8,9 +8,10 @@ on:
 jobs:
     deploy:
         runs-on: ubuntu-latest
+        permissions:
+          contents: write
         steps:
-          - name: Checkout 🛎️
-            uses: actions/checkout@v3
+          - uses: actions/checkout@v3
 
           - name: Setup Node.js
             uses: actions/setup-node@v3
@@ -24,7 +25,13 @@ jobs:
             uses: borales/actions-yarn@v4
             with:
               cmd: build
-          - name: Deploy gh-page
-            uses: peaceiris/actions-gh-pages@v3
+          - name: Run build
+            uses: borales/actions-yarn@v4
             with:
-              github_token: ${{ secrets.PAT_gh_page }}
+              cmd: deploy
+
+
+#          - name: Deploy gh-page
+#            uses: peaceiris/actions-gh-pages@v3
+#            with:
+#              github_token: ${{ secrets.PAT_gh_page }}
