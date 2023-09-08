@@ -11,12 +11,13 @@ import {
   GameMode,
   SettingContext,
 } from '../../state/playerSetting';
-import { checkIfIos, endSpeaking, speak } from '../../utils/utils';
+import { checkIfIos } from '../../utils/utils';
 import { generateAvalonScript, generateQuestScript } from './generateScript';
 import { t } from '@lingui/macro';
 import PlayButton from '../components/PlayButton';
 import StopButton from '../components/StopButton';
 import CurrentSettingDisplay from '../components/CurrentSettingDisplay';
+import { endSpeaking, speak } from '../../utils/speakingUtils';
 
 const useStyles = makeStyles((theme) => ({
   mcCard: {
