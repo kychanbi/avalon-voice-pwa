@@ -20,11 +20,11 @@ jobs:
             uses: borales/actions-yarn@v4
             with:
               cmd: install
-          - run: |
-              git config --global user.email "travischanky@gmail.com"
-              git config --global user.name "kychanbi"
-          - name: Deploy to GitHub Pages
+          - name: Run build
             uses: borales/actions-yarn@v4
             with:
-              cmd: deploy-gh-page
+              cmd: build
+          - name: Deploy gh-page
+            uses: peaceiris/actions-gh-pages@v3
+            with:
               github_token: ${{ secrets.PAT_gh_page }}
