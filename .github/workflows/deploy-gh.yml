@@ -8,8 +8,6 @@ on:
 jobs:
     deploy:
         runs-on: ubuntu-latest
-        permissions:
-          contents: write
         steps:
           - uses: actions/checkout@v3
 
@@ -25,16 +23,7 @@ jobs:
             uses: borales/actions-yarn@v4
             with:
               cmd: build
-          - run: |
-              git config --global user.email "travischanky@gmail.com"
-              git config --global user.name "kychanbi"
-          - name: Run deploy
-            uses: borales/actions-yarn@v4
+          - name: Deploy gh-page
+            uses: peaceiris/actions-gh-pages@v3
             with:
-              cmd: deploy
-
-
-#          - name: Deploy gh-page
-#            uses: peaceiris/actions-gh-pages@v3
-#            with:
-#              github_token: ${{ secrets.PAT_gh_page }}
+              github_token: ${{ secrets.PAT_gh_page }}
