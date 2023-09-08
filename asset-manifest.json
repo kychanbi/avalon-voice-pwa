@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/avalon-voice-pwa/static/css/main.ba17183d.css",
-    "main.js": "/avalon-voice-pwa/static/js/main.d2d8f9db.js",
+    "main.js": "/avalon-voice-pwa/static/js/main.ae939c13.js",
     "static/js/318.2d5696bc.chunk.js": "/avalon-voice-pwa/static/js/318.2d5696bc.chunk.js",
     "static/js/543.9e4497ff.chunk.js": "/avalon-voice-pwa/static/js/543.9e4497ff.chunk.js",
     "static/js/27.f8b324e5.chunk.js": "/avalon-voice-pwa/static/js/27.f8b324e5.chunk.js",
@@ -10,6 +10,6 @@
   },
   "entrypoints": [
     "static/css/main.ba17183d.css",
-    "static/js/main.d2d8f9db.js"
+    "static/js/main.ae939c13.js"
   ]
 }
