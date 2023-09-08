@@ -117,34 +117,36 @@ export const SettingContextProvider = ({
 }: SettingContextProviderProp) => {
   const [allSetting, setAllSetting] = useState<AllSetting>(defaultAllSetting);
   const editAllCharacterSettings = (value: AvalonCharacterSetting) => {
-    let tempSetting = allSetting.avalonCharacterSetting;
-    tempSetting = { ...tempSetting, ...value };
-    setAllSetting({
-      ...allSetting,
-      avalonCharacterSetting: tempSetting,
-    });
+    setAllSetting((oldSetting) => ({
+      ...oldSetting,
+      avalonCharacterSetting: {
+        ...oldSetting.avalonCharacterSetting,
+        ...value,
+      },
+    }));
   };
   const editSetting = (name: string, value: any) => {
     if (name.includes('.')) {
-      const [subSetting, settingType] = name.split('.');
-      let tempSetting =
-        allSetting[
-          subSetting as 'avalonCharacterSetting' | 'questCharacterSetting'
-        ];
-      tempSetting = {
-        ...tempSetting,
-        [settingType]: value,
-      };
-      setAllSetting({
-        ...allSetting,
-        [subSetting]: tempSetting,
+      setAllSetting((oldSetting) => {
+        const [subSetting, settingType] = name.split('.');
+        let tempSetting =
+          oldSetting[
+            subSetting as 'avalonCharacterSetting' | 'questCharacterSetting'
+          ];
+        tempSetting = {
+          ...tempSetting,
+          [settingType]: value,
+        };
+        return {
+          ...oldSetting,
+          [subSetting]: tempSetting,
+        };
       });
     } else {
-      const tempSetting = {
-        ...allSetting,
+      setAllSetting((oldSetting) => ({
+        ...oldSetting,
         [name]: value,
-      };
-      setAllSetting(tempSetting);
+      }));
     }
   };
   return (
