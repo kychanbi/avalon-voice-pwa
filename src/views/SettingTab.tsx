@@ -67,8 +67,6 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
   const [formState, setFormState] = useState<AllSetting>(
     allSetting ?? defaultAllSetting,
   );
-  console.log('SettingTab', formState.language);
-
   const handleSwitchLang = async (
     event: React.ChangeEvent<{}>,
     value: Language,
