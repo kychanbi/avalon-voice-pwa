@@ -24,3 +24,4 @@ jobs:
             uses: borales/actions-yarn@v4
             with:
               cmd: deploy-gh-page
+              github_token: ${{ secrets.PAT_gh_page }}
