@@ -21,8 +21,8 @@ jobs:
             with:
               cmd: install
           - run: |
-              git config --global user.email "git@github.com"
-              git config --global user.name "Github Actions"
+              git config --global user.email "travischanky@gmail.com"
+              git config --global user.name "kychanbi"
           - name: Deploy to GitHub Pages
             uses: borales/actions-yarn@v4
             with:
