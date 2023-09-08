@@ -11,5 +11,16 @@ jobs:
         steps:
           - name: Checkout 🛎️
             uses: actions/checkout@v3
+
+          - name: Setup Node.js
+            uses: actions/setup-node@v3
+            with:
+              node-version: 18.x
+          - name: Run install
+            uses: borales/actions-yarn@v4
+            with:
+              cmd: install
           - name: Deploy to GitHub Pages
-            run: yarn deploy-gh-page
+            uses: borales/actions-yarn@v4
+            with:
+              cmd: deploy-gh-page
