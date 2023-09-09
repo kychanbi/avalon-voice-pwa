@@ -1,4 +1,4 @@
-[![Deploy On GitHub Pages](https://github.com/kychanbi/avalon-voice-pwa/actions/workflows/jekyll-gh-pages.yml/badge.svg)](https://github.com/kychanbi/avalon-voice-pwa/actions/workflows/jekyll-gh-pages.yml)
+[![Deploy On GitHub Pages](https://github.com/kychanbi/avalon-voice-pwa/actions/workflows/jekyll-gh-pages.yml/badge.svg?branch=master)](https://github.com/kychanbi/avalon-voice-pwa/actions/workflows/jekyll-gh-pages.yml)
 
 A script generator and reader of the game Avalon and Quest.
 
