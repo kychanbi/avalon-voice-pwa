@@ -1,10 +1,4 @@
-import {
-  Box,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-} from '@material-ui/core';
+import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 import React, { useContext } from 'react';
 import { SettingContext } from '../../../state/playerSetting';
 import { endSpeaking } from '../../../utils/speakingUtils';

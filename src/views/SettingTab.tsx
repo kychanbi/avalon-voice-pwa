@@ -29,7 +29,6 @@ import { Constants } from '../Constant';
 import { TabPanel } from './components/TabPanel';
 import { Trans } from '@lingui/macro';
 import { dynamicActivate } from '../i18nHelper';
-import { endSpeaking } from '../utils/speakingUtils';
 
 const useStyle = makeStyles((theme) => ({
   settingTab: {

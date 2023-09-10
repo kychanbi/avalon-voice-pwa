@@ -5,10 +5,8 @@ import {
   SettingContext,
 } from '../../state/playerSetting';
 import { generateAvalonScript, generateQuestScript } from './generateScript';
-import { checkIfIos } from '../../utils/utils';
 import { endSpeaking, speak } from '../../utils/speakingUtils';
 import { t } from '@lingui/macro';
-import { useVoices } from '../../state/useVoices';
 
 const addLineBreaksToScript = (script: string[]): (string | JSX.Element)[] =>
   script.map((x) => [x, <br />]).reduce((ac, curr) => ac.concat(curr), []);
@@ -41,23 +39,6 @@ export const useMCPageHook = () => {
     setScriptDisplay(t);
   }, [allSetting]);
 
-  // const checkIfVoiceLoaded = useCallback(() => {
-  //   const synth = window.speechSynthesis;
-  //   const voices = synth.getVoices();
-  //   if (voices.length > 0) {
-  //     setAreVoicesLoad(true);
-  //   }
-  // }, [setAreVoicesLoad]);
-
-  // useEffect(() => {
-  //   if (checkIfIos()) {
-  //     checkIfVoiceLoaded();
-  //   } else {
-  //     //onvoiceschanged will trigger when the voices are acutally loaded
-  //     window.speechSynthesis.onvoiceschanged = checkIfVoiceLoaded;
-  //     checkIfVoiceLoaded();
-  //   }
-  // }, []);
   const playScript = useCallback(() => {
     endSpeaking();
     scriptArr.forEach((s) => {

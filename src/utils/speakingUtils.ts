@@ -1,14 +1,9 @@
-//
-
 export function findVoicesByLang(lang: string): SpeechSynthesisVoice[] {
-  console.log('findVoicesByLang', lang);
   const synth = window.speechSynthesis;
   const voices: SpeechSynthesisVoice[] = synth.getVoices();
-  const foundVoiceArr = voices.filter((v) => {
+  return voices.filter((v) => {
     return v.lang === lang;
   });
-  console.log('foundVoiceArr', foundVoiceArr);
-  return foundVoiceArr;
 }
 export async function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
