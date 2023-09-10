@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Constants } from '../Constant';
+import { useVoices } from './useVoices';
 
 export interface AvalonCharacterSetting {
   totalNumberOfPlayer: string;
@@ -27,7 +28,7 @@ export enum GameMode {
   Quest = 'quest',
 }
 
-export type Language = 'en-GB' | 'zh-hk';
+export type Language = 'en-GB' | 'zh-HK';
 
 export interface AllSetting extends VoiceSetting {
   avalonCharacterSetting: AvalonCharacterSetting;
@@ -47,15 +48,6 @@ export interface PresetSetting extends AvalonCharacterSetting {
   desc: string;
 }
 
-// export interface SettingFormState extends VoiceSetting, CharacterSetting {
-//   isDarkMode: boolean,
-//   isNewbieMode: boolean,
-// }
-
-// export const defaultFormSettingState: AllSetting = {
-
-// };
-
 export const defaultAllSetting: AllSetting = {
   avalonCharacterSetting: {
     totalNumberOfPlayer: '5',
@@ -71,7 +63,7 @@ export const defaultAllSetting: AllSetting = {
   isDarkMode: false,
   isNewbieMode: false,
   gameMode: GameMode.Avalon,
-  language: 'zh-hk',
+  language: 'zh-HK',
   questCharacterSetting: {
     isBlindHunterPresent: true,
     isClericPresent: true,
@@ -96,16 +88,20 @@ export function calcGoodEvilNumber(total: string): GoodEvilNumber {
   } as GoodEvilNumber;
 }
 
-interface SettingContextType {
+type SettingContextType = {
   allSetting: AllSetting;
   editSetting: Function;
   editAllCharacterSettings: Function;
-}
+} & ReturnType<typeof useVoices>;
 
 export const SettingContext = React.createContext<SettingContextType>({
   allSetting: defaultAllSetting,
   editSetting: () => {},
   editAllCharacterSettings: () => {},
+  voices: [],
+  selectedVoice: undefined,
+  setSelectedVoice: () => {},
+  areVoicesLoaded: false,
 });
 
 interface SettingContextProviderProp {
@@ -116,6 +112,9 @@ export const SettingContextProvider = ({
   children,
 }: SettingContextProviderProp) => {
   const [allSetting, setAllSetting] = useState<AllSetting>(defaultAllSetting);
+  const { selectedVoice, voices, setSelectedVoice, areVoicesLoaded } =
+    useVoices(allSetting.language);
+
   const editAllCharacterSettings = (value: AvalonCharacterSetting) => {
     setAllSetting((oldSetting) => ({
       ...oldSetting,
@@ -155,6 +154,10 @@ export const SettingContextProvider = ({
         allSetting,
         editSetting,
         editAllCharacterSettings,
+        selectedVoice,
+        voices,
+        setSelectedVoice,
+        areVoicesLoaded,
       }}
     >
       {children}

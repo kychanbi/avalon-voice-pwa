@@ -29,6 +29,7 @@ import { Constants } from '../Constant';
 import { TabPanel } from './components/TabPanel';
 import { Trans } from '@lingui/macro';
 import { dynamicActivate } from '../i18nHelper';
+import { endSpeaking } from '../utils/speakingUtils';
 
 const useStyle = makeStyles((theme) => ({
   settingTab: {
@@ -76,7 +77,7 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
 
     setFormState((prevFormState) => ({ ...prevFormState, language: value }));
     editSetting('language', value);
-    if (value === 'zh-hk') {
+    if (value === 'zh-HK') {
       setFormState((prevFormState) => ({
         ...prevFormState,
         speakingRate: 0.8,
@@ -134,7 +135,7 @@ const SettingTab = ({ closeDialog }: { closeDialog: EventHandler<any> }) => {
         onChange={handleSwitchLang}
       >
         <ToggleButton value={'en-GB'}>English</ToggleButton>
-        <ToggleButton value={'zh-hk'}>中文</ToggleButton>
+        <ToggleButton value={'zh-HK'}>中文</ToggleButton>
       </ToggleButtonGroup>
       <Tabs
         value={formState.gameMode}

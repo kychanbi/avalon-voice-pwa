@@ -3,7 +3,7 @@ import { Language } from './state/playerSetting';
 
 export const locales = {
   'en-GB': 'English',
-  'zh-hk': '中文',
+  'zh-HK': '中文',
 };
 
 export async function dynamicActivate(locale: Language) {
