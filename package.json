@@ -1,9 +1,10 @@
 {
   "name": "avalon-pwa",
   "homepage": "https://kychanbi.github.io/avalon-voice-pwa",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@changesets/cli": "^2.26.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@lingui/react": "^4.3.0",
