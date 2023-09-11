@@ -5,7 +5,9 @@ export function findVoiceByLang(
 ): SpeechSynthesisVoice | undefined {
   const synth = window.speechSynthesis;
   const voices: SpeechSynthesisVoice[] = synth.getVoices();
-  const foundVoiceArr = voices.filter((v) => langs.includes(v.lang));
+  const foundVoiceArr = voices
+    .filter((v) => !v.voiceURI.includes('eloquence'))
+    .filter((v) => langs.includes(v.lang));
   console.log('foundVoiceArr', foundVoiceArr);
   const [found] = foundVoiceArr;
   return found;
