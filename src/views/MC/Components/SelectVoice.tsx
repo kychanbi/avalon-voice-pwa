@@ -9,7 +9,7 @@ export const SelectVoice = () => {
   const handleSelectVoice = (event: React.ChangeEvent<{ value: unknown }>) => {
     endSpeaking();
     const value = event.target.value as string;
-    const pickedVoice = voices.find((voice) => voice.name === value);
+    const pickedVoice = voices.find((voice) => voice.voiceURI === value);
     setSelectedVoice(pickedVoice);
   };
   return (
@@ -24,13 +24,13 @@ export const SelectVoice = () => {
         key={'select-voice-select'}
         labelId="select-voice-input-label"
         id="select-voice"
-        value={selectedVoice?.name || ''}
+        value={selectedVoice?.voiceURI || ''}
         onChange={handleSelectVoice}
         name="selectedVoice"
       >
         {voices.map((voice) => (
-          <MenuItem key={voice.name} value={voice.name}>
-            {voice.name}
+          <MenuItem key={voice.voiceURI} value={voice.voiceURI}>
+            {voice.name} ({voice.voiceURI})
           </MenuItem>
         ))}
       </Select>
