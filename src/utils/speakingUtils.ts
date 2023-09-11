@@ -1,9 +1,9 @@
 export function findVoicesByLang(lang: string): SpeechSynthesisVoice[] {
   const synth = window.speechSynthesis;
   const voices: SpeechSynthesisVoice[] = synth.getVoices();
-  return voices.filter((v) => {
-    return v.lang === lang;
-  });
+  return voices
+    .filter((v) => !v.voiceURI.includes('eloquence'))
+    .filter((v) => v.lang.includes(lang.substring(0,2)));
 }
 export async function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
