@@ -1,8 +1,10 @@
-import React, {
-  useCallback, useContext, useMemo, useState,
-} from 'react';
+import React, { useCallback, useContext, useMemo, useState } from 'react';
 import {
-  createMuiTheme, Dialog, Fab, makeStyles, MuiThemeProvider,
+  createMuiTheme,
+  Dialog,
+  Fab,
+  makeStyles,
+  MuiThemeProvider,
 } from '@material-ui/core';
 import SettingsIcon from '@material-ui/icons/Settings';
 import BrightnessMediumIcon from '@material-ui/icons/BrightnessMedium';
@@ -15,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
     width: '100vw',
-    height: '100vh',
+    height: '100dvh',
     position: 'relative',
     boxSizing: 'border-box',
   },
@@ -40,7 +42,10 @@ export const Main = () => {
   }, [allSetting.isDarkMode, editSetting]);
 
   const appliedTheme = useMemo(
-    () => createMuiTheme(allSetting.isDarkMode ? Constants.theme.dark : Constants.theme.light),
+    () =>
+      createMuiTheme(
+        allSetting.isDarkMode ? Constants.theme.dark : Constants.theme.light,
+      ),
     [allSetting],
   );
 
@@ -59,10 +64,20 @@ export const Main = () => {
         <Dialog open={isDialogOpen} onClose={closeDialog} fullWidth>
           <SettingTab closeDialog={closeDialog} />
         </Dialog>
-        <Fab color="secondary" aria-label="edit" onClick={btnOnClick} className={classes.fab}>
+        <Fab
+          color="secondary"
+          aria-label="edit"
+          onClick={btnOnClick}
+          className={classes.fab}
+        >
           <SettingsIcon />
         </Fab>
-        <Fab color="secondary" aria-label="toggle dark mode" onClick={toggleDarkMode} className={classes.fabLeft}>
+        <Fab
+          color="secondary"
+          aria-label="toggle dark mode"
+          onClick={toggleDarkMode}
+          className={classes.fabLeft}
+        >
           <BrightnessMediumIcon />
         </Fab>
       </div>
