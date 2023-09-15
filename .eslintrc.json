@@ -6,6 +6,7 @@
     "extends": [
         "airbnb",
         "plugin:react/recommended",
+        "plugin:react-hooks/recommended",
         "plugin:prettier/recommended"
     ],
     "parser": "@typescript-eslint/parser",
@@ -18,9 +19,10 @@
     },
     "plugins": [
         "react",
+        "react-hooks",
         "@typescript-eslint",
         "prettier",
-        "only-warn"
+        "only-warn" // this will turn off all eslint errors
     ],
     "rules": {
         "no-shadow": "off",
@@ -31,6 +33,9 @@
         "@typescript-eslint/no-use-before-define": ["error"],
         "space-before-blocks": ["error", "never"],
         "jsx-quotes":["error", "prefer-single"],
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "error",
+        "no-unused-vars":"error",
         "react/jsx-filename-extension": [
             2,
             {

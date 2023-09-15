@@ -1,33 +1,30 @@
-import { Constants } from '../Constant';
+import { Language } from '../state/playerSetting';
 
-export function findVoiceByLang(
-  langs: string[],
-): SpeechSynthesisVoice | undefined {
+const voiceLangCodeMap: { [K in Language]: string } = {
+  'en-GB': 'en',
+  'zh-HK': 'HK',
+};
+export function findVoicesByLang(lang: Language): SpeechSynthesisVoice[] {
   const synth = window.speechSynthesis;
   const voices: SpeechSynthesisVoice[] = synth.getVoices();
-  const foundVoiceArr = voices
+  const voiceLangCode = voiceLangCodeMap[lang];
+  return voices
     .filter((v) => !v.voiceURI.includes('eloquence'))
-    .filter((v) => langs.includes(v.lang));
-  console.log('foundVoiceArr', foundVoiceArr);
-  const [found] = foundVoiceArr;
-  return found;
+    .filter((v) => v.lang.includes(voiceLangCode));
 }
 export async function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export function speak(
-  text: string,
-  rate = 1,
-  lang: string = Constants.langs[0],
-) {
+export function speak(text: string, rate = 1, voice?: SpeechSynthesisVoice) {
+  if (!voice) {
+    console.error('No available voice');
+    return;
+  }
   const synth = window.speechSynthesis;
   const utterance = new SpeechSynthesisUtterance(text);
-  utterance.voice = findVoiceByLang([
-    lang,
-    ...Constants.langs,
-  ]) as SpeechSynthesisVoice;
-  utterance.lang = utterance.voice?.lang;
+  utterance.voice = voice;
+  utterance.lang = voice.lang;
   utterance.rate = rate;
   synth.speak(utterance);
 }

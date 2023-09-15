@@ -41,6 +41,7 @@
     "workbox-streams": "^6.3.0"
   },
   "scripts": {
+    "lint": "eslint src",
     "translate": "npx lingui extract",
     "build-translate": "npx lingui compile",
     "deploy-gh-page": "yarn run build && yarn run deploy",

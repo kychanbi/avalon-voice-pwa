@@ -2,7 +2,7 @@ import {
   AllSetting,
   calcGoodEvilNumber,
   defaultAllSetting,
-} from '../../state/playerSetting';
+} from '../../../state/playerSetting';
 import { Box, Typography } from '@material-ui/core';
 import React from 'react';
 import { t } from '@lingui/macro';
