@@ -1,5 +1,6 @@
 {
   "name": "avalon-pwa",
+  "homepage": "https://kychanbi.github.io/avalon-voice-pwa",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
